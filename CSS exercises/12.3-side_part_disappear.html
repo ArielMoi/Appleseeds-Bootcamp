@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .right-side {
+            width: 60%;
+            float: right;
+            background-color: olive;
+        }
+
+        .left-side {
+            width:40%;
+            float:left;
+            background-color: palevioletred;
+        }
+
+        /* phones and tables */
+        @media (max-width: 768px){
+            .left-side {
+                visibility: hidden;
+            }
+
+            .right-side {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="right-side">
+            <h1>Hi,</h1>
+            <h2>im the main part</h2>
+        </div>
+
+        <div class="left-side">
+            <h1>im side bar</h1>
+        </div>
+    </div>
+</body>
+
+</html>

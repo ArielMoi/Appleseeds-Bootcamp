@@ -1,0 +1,176 @@
+/* https://colorhunt.co/palette/110659 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  line-height: 21px;
+  font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Amatic SC", cursive;
+}
+
+p {
+  font-family: "Bellefair", serif;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Utilities */
+
+.btn {
+    border: 2px soild #7c7575;
+    border-radius: 25px;
+    background-color: none;
+    width: 10vw;
+}
+
+/* Bio */
+/* nav */
+header nav ol {
+    background-color: #b8b0b0;
+    /* width: 20vw; */
+    text-align: center;
+}
+
+header nav ol li{
+    list-style: none;
+    display: inline-block;
+    padding: 5px;
+    margin: auto;
+    color: #fbf0f0;
+    width: 33%;
+}
+
+
+header nav ol li:hover {
+    background-color: #dfd3d3;
+}
+
+/* introduction */
+
+.intro {
+    text-align: center;
+    padding: 3vw;
+    background: #b8b0b0;
+}
+.intro .cv-pic {
+    display: inline-block;    
+}
+
+.intro .cv-pic img {
+    width: 11vw;
+    height: 18vh;
+    border-radius: 20px;
+}
+
+.intro-opening {
+    display: inline-block;
+    margin: auto;
+    padding-left: 3vw;
+}
+
+.intro-opening h1 {
+    padding-bottom: 1.5vw;
+    font-size: 8vh;
+    color: #fbf0f0;
+}
+
+
+/* Projects */
+
+.projects {
+    background-color: #dfd3d3;
+    height: 45vh;
+    text-align: center;
+}
+
+.projects-header h1{
+    padding: 10vh;
+    color: #fbf0f0;
+    font-size: 4rem;
+    text-decoration: underline;
+    font-weight: 900;
+}
+
+.projects-details h2 a{
+    display: block;
+    margin-bottom: 30px;
+    color: black;
+}
+
+.projects-details h2 a:hover {
+    color: #7c7575;
+}
+
+/* Contacts */
+.contact-me {
+    text-align: center;
+    background: #fbf0f0;
+    padding-bottom: 8vh;
+}
+
+.contact-header {
+    padding: 8vh;
+}
+
+.contact-header h1 {
+    font-size: 2rem;
+}
+
+.contact-details div {
+    padding: 2rem;
+}
+
+.contact-details h1 {
+    font-weight: 900;
+}
+
+.contact-details {
+    padding-bottom: 5vh;
+}
+
+.follow-me {
+    background-color: #b8b0b0;
+}
+
+.follow-me h2 {
+    color: #fff;
+    padding: 5vh;
+}
+
+.follow-me {
+    padding-bottom: 5vh;
+    margin-bottom: 5vh;
+}
+
+/* Mobile adjuments */
+
+
+@media (max-width:768px){
+    header nav ol li {
+        width:25%;
+    }
+
+    .intro .cv-pic img {
+        width: 10vw;
+        height: 8vh;
+        border-radius: 20px;
+    }
+
+    .btn {
+        width: 70vw;
+    }
+}

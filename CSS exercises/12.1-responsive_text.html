@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12.1 responsive text</title>
+    <style>
+        /* Smartphone */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 15px;
+            }
+
+            body {
+                background: black;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 501px) and (max-width: 768px) {
+            h1 {
+                font-size: 45px;
+            }
+
+            body {
+                background: gold;
+            }
+        }
+
+        /* Normal */
+
+        @media (min-width: 769px){
+            h1 {
+                font-size: 155px;
+            }
+
+            body {
+                background: olive;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hi im Text</h1>
+</body>
+</html>
