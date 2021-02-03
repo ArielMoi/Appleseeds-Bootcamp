@@ -7,9 +7,13 @@
 }
 
 html,
-body {
+body { 
   line-height: 21px;
   font-size: 14px;
+  --darkest-color:#7c7575;
+  --dark-color: #b8b0b0;
+  --light-color: #dfd3d3;
+  --lightest-color:#fbf0f0;
 }
 
 h1,
@@ -31,7 +35,7 @@ a {
 /* Utilities */
 
 .btn {
-    border: 2px soild #7c7575;
+    border: 2px soild var(--darkest-color);
     border-radius: 25px;
     background-color: none;
     width: 10vw;
@@ -40,7 +44,7 @@ a {
 /* Bio */
 /* nav */
 header nav ol {
-    background-color: #b8b0b0;
+    background-color: var(--dark-color);
     /* width: 20vw; */
     text-align: center;
 }
@@ -50,13 +54,13 @@ header nav ol li{
     display: inline-block;
     padding: 5px;
     margin: auto;
-    color: #fbf0f0;
+    color: var(--lightest-color);
     width: 33%;
 }
 
 
 header nav ol li:hover {
-    background-color: #dfd3d3;
+    background-color: var(--light-color);
 }
 
 /* introduction */
@@ -64,7 +68,7 @@ header nav ol li:hover {
 .intro {
     text-align: center;
     padding: 3vw;
-    background: #b8b0b0;
+    background: var(--dark-color);
 }
 .intro .cv-pic {
     display: inline-block;    
@@ -85,21 +89,21 @@ header nav ol li:hover {
 .intro-opening h1 {
     padding-bottom: 1.5vw;
     font-size: 8vh;
-    color: #fbf0f0;
+    color: var(--lightest-color);
 }
 
 
 /* Projects */
 
 .projects {
-    background-color: #dfd3d3;
+    background-color: var(--light-color);
     height: 45vh;
     text-align: center;
 }
 
 .projects-header h1{
     padding: 10vh;
-    color: #fbf0f0;
+    color: var(--lightest-color);
     font-size: 4rem;
     text-decoration: underline;
     font-weight: 900;
@@ -112,13 +116,13 @@ header nav ol li:hover {
 }
 
 .projects-details h2 a:hover {
-    color: #7c7575;
+    color: var(--darkest-color);
 }
 
 /* Contacts */
 .contact-me {
     text-align: center;
-    background: #fbf0f0;
+    background: var(--lightest-color);
     padding-bottom: 8vh;
 }
 
@@ -143,7 +147,7 @@ header nav ol li:hover {
 }
 
 .follow-me {
-    background-color: #b8b0b0;
+    background-color: var(--dark-color);
 }
 
 .follow-me h2 {

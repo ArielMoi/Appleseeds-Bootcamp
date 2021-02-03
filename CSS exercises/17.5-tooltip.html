@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+            position: relative;
+        }
+
+        a:hover::after {
+            content: 'hello world';
+            position: absolute;
+            background: yellow;
+            width: max-content;
+            bottom: 100%;
+            padding: 4px;
+            border-radius: 25px;
+            right: 1px;
+        }
+
+        a:hover::before {
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 7px solid yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti cum voluptas reiciendis ut nesciunt a tempore
+        eaque sint! Aut accusantium dicta blanditiis <a href=""> error</a> nemo et sapiente animi tempore minima
+        dignissimos?</p>
+</body>
+
+</html>

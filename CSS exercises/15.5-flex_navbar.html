@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex nav</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            width: 100vw;
+            background: grey;
+            flex-wrap: nowrap;
+        }
+
+        h1 {
+            font-size: 16px;
+            align-self: center;
+        }
+
+        .box2 {
+            margin-left: auto;
+            margin-right: 15px;
+        }
+
+        ol li {
+            list-style: none;
+            display: inline-block;
+            width: 80px;
+        }
+
+        @media screen and (max-width: 500px) {
+            .box1, .box2 {
+                display: inline;
+                width: 100vw;
+                text-align: center;
+                margin:0;
+            }
+
+            ol {
+                padding: 0;
+            }
+
+            ol li{
+                width: 100vw;
+                padding-top: 5px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-container">
+        <div class="box1">
+            <h1>APPLESEEDS</h1>
+        </div>
+        <div class="box2">
+            <ol>
+                <li>Home</li>
+                <li>About</li>
+                <li>Portfolio</li>
+                <li>Contact</li>
+            </ol>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

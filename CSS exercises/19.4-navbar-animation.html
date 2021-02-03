@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navbar animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background-color: coral;
+        }
+
+        ol li {
+            list-style: none;
+            display: inline-block;
+            padding: 15px 0;
+            margin: 0 15px;
+            overflow: hidden;
+            width: max-content;
+        }
+
+        ol li:after {
+            content: '';
+            display: block;
+            width: 0%;
+            padding-top: 3px;
+            border-bottom: 1px solid black;
+            transition: 0.5s;
+        }
+
+        ol li:hover::after {
+            width: 100%;
+        }
+
+        ol li:before {
+            content: '';
+            display: block;
+            width: 100%;
+            padding-bottom: 3px;
+            border-top: 1px solid black;
+            transition: 0.5s;
+            position: relative;
+            left: 60px;
+        }
+
+        ol li:hover::before {
+            transform: translateX(-60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ol>
+            <li>Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Portfolio</li>
+        </ol>
+    </div>
+</body>
+</html>

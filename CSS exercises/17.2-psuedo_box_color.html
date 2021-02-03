@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17.2-psuedo_box_color</title>
+    <style>
+        .box {
+            background-color: purple;
+            width: 20vw;
+            height: 50vh;
+        }
+
+        .box::after {
+            content: "";
+            display: inline-block;
+            height:50vh;
+            width: 10vw;
+            background-color: darkblue;
+            position: absolute;
+            left: 20vw;
+        }
+
+        .box:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

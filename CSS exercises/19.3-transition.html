@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+    <style>
+        .container {
+            margin: 50px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            flex-flow: column;
+        }
+
+        .btn {
+            padding: 8px;
+        }
+
+        .small-container {
+            overflow: hidden;
+            margin-top: 35px;
+            width: max-content;
+            position: relative;
+        }
+
+        /* translateY */
+
+        .translateY {
+            width: 100px;
+            height: 50px;
+            position: relative;
+        }
+
+        .translateY::before {
+            content: 'YEAH!';
+            display: flex;
+            position: absolute;
+            width: 98px;
+            height: 48px;
+            background-color: red;
+            bottom: 47px;
+            left: -2px;
+            border: 1px black solid;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .translateY:hover {
+            transition: all 0.5s ease-in-out;
+            transform: translateY(49px);
+        }
+
+        /* TRanslate */
+
+        .Translate {
+            width: 100px;
+            height: 40px;
+            position: relative;
+            background: linear-gradient(to right, black 50%, white 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            transition: all .5s ease-out;
+        }
+
+        .Translate:hover {
+            background-position: left bottom;
+            color: white;
+        }
+
+        /* rotate */
+
+        .rotate {
+            width: 80px;
+            height: 40px;
+            transition: all .5s ease-out;
+            position: relative;
+            background-color: transparent;
+            border: 1px solid black;
+            z-index: 1;
+        }
+
+        .rotate::before {
+            content: '';
+            display: inline-block;
+            height: 80px;
+            width: 40px;
+            background-color: yellow;
+            position: absolute;
+            bottom: -22px;
+            left: 18px;
+            visibility: hidden;
+            transition: all 1s ease-in-out;
+            z-index: -1;
+        }
+
+        .rotate:hover::before {
+            transform: rotate(90deg);
+            visibility: visible;
+        }
+
+        /* scale & opacity */
+
+        .scale {
+            width: 120px;
+            height: 40px;
+            position: relative;
+
+        }
+
+        .scale::before {
+            content: 'scale & opacity';
+            display: flex;
+            width: 240px;
+            height: 80px;
+            background-color: black;
+            color: white;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+            top: -21px;
+            right: -60px;
+            visibility: hidden;
+            transition: all 1s ease-in-out;
+            opacity: 50%;
+        }
+
+        .scale:hover::before {
+            visibility: visible;
+            transform: scale(0.5);
+            opacity: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class='small-container'>
+            <button class="btn translateY"><span>translateY</span></button>
+        </div>
+        <div class="small-container"><button class="btn Translate">Translate</button></div>
+        <div class="small-container"><button class="btn rotate"><span class="rotate-span">rotate</span></button></div>
+        <div class="small-container"><button class="btn scale">scale & opacity</button></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinners</title>
+    <style>
+        .loader {
+            border: 16px solid grey;
+            border-top: 16px solid blue;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spinner1 2s linear infinite;
+        }
+
+        @keyframes spinner1 {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .loader2 {
+            border: 16px solid transparent;
+            border-top: 16px solid blue;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spinner2 0.81s linear infinite;
+        }
+
+        @keyframes spinner2 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* Section two */
+
+        .spinner-container {
+
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .spinner {
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            background-color: grey;
+            border-radius: 50%;
+            margin: auto 10px;
+        }
+
+        .circle1 {
+            animation-name: circle1;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .circle2 {
+            animation-name: circle2;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .circle3 {
+            animation-name: circle3;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes circle1 {
+            0% {
+                background-color: grey;
+            }
+
+            10% {
+                background-color: cornflowerblue;
+            }
+
+            33% {
+                background-color: gray;
+            }
+        }
+
+        @keyframes circle2 {
+
+            0% {
+                background-color: grey;
+            }
+
+            43% {
+                background-color: cornflowerblue;
+            }
+
+            66% {
+                background-color: grey;
+            }
+        }
+
+        @keyframes circle3 {
+            0% {
+                background-color: grey;
+            }
+
+            80% {
+                background-color: cornflowerblue;
+            }
+
+            100% {
+                background-color: grey;
+            }
+
+        }
+
+        /* jumping loading */
+
+        .round1 {
+            animation-name: round1;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .round2 {
+            animation-name: round2;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .round3 {
+            animation-name: round3;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes round1 {
+            20% {
+                transform: translateY(-20px);
+            }
+
+            40% {
+                transform: translateY(0);
+            }
+        }
+
+
+        @keyframes round2 {
+            30% {
+                transform: translateY(0);
+            }
+            
+            50% {
+                transform: translateY(-20px);
+            }
+
+            70% {
+                transform: translateY(0);
+            }
+        }
+
+
+        @keyframes round3 {
+            60% {
+                transform: translateY(0);
+            }
+            
+            80% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+            
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loader"></div>
+        <div class="loader2"></div>
+        <div class="spinner-container">
+            <div class="spinner circle1"></div>
+            <div class="spinner circle2"></div>
+            <div class="spinner circle3"></div>
+        </div>
+
+        <div class="spinner-container">
+            <div class="spinner round1"></div>
+            <div class="spinner round2"></div>
+            <div class="spinner round3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

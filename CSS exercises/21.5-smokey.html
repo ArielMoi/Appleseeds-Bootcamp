@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smokey</title>
+    <style>
+        .container {
+            display: inline-block;
+            align-items: center;
+            width: 400px;
+            height: 200px;
+            text-align: center;
+        }
+
+        h1{
+            width: 100%;
+            position: absolute;
+        }
+
+        .s,.m,.o,.k,.e,.y {
+            display: inline-block;
+            transition: ease-in-out;
+            animation: s 3s ease-in-out infinite;
+        }
+
+        .s {
+            animation-name: s;
+        }
+
+        .m {
+            animation-name: m;
+        }
+
+        .o {
+            animation-name: o;
+        }
+
+        .k {
+            animation-name: k;
+        }
+
+        .e {
+            animation-name: e;
+        }
+
+        .y {
+            animation-name: y;
+        }
+
+        @keyframes s {
+            16.7% {
+                transform: translate(80px, -50px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+        @keyframes m {
+            16.7% {
+                transform: translate(0) rotate(0);
+                opacity: 100%;
+            }
+            33% {
+                transform: translate(80px, -50px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+        @keyframes o {
+            33% {
+                transform: translate(0) rotate(0);
+                opacity: 100%;
+            }
+            49.7% {
+                transform: translate(80px, -50px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+        @keyframes k {
+            49.7% {
+                transform: translate(0) rotate(0);
+                opacity: 100%;
+            }
+            66.4% {
+                transform: translate(80px, -50px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+        @keyframes e {
+            66.4% {
+                transform: translate(0) rotate(0);
+                opacity: 100%;
+            }
+            83.1% {
+                transform: translate(80px, -30px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+        @keyframes y {
+            83.1% {
+                transform: translate(0) rotate(0);
+                opacity: 100%;
+            }
+            100% {
+                transform: translate(80px, -50px) rotate(60deg);
+                opacity: 0%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class='s'>s</span><span class='m'>m</span><span class='o'>o</span><span class='k'>k</span><span class='e'>e</span><span class='y'>y</span></h1>
+    </div>
+</body>
+</html>

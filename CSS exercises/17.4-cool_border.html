@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cool border</title>
+    <style>
+        .box {
+            background-color: black;
+            width: 10vw;
+            height: 20vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: 1rem;
+            padding-top: 9vh;
+        }
+
+        .box::before {
+            content: "";
+            display: inline-block;
+            border-top: 3px solid red;
+            border-left: 3px solid red;
+            width: 2vw;
+            height: 4vh;
+            position: absolute;
+            left: 1vw;
+            top: 1vw;
+        }
+        .box::after {
+            content: "";
+            display: inline-block;
+            border-top: 3px solid red;
+            border-right: 3px solid red;
+            width: 2vw;
+            height: 4vh;
+            position: absolute;
+            left: 8vw;
+            top: 1vw;
+        }
+
+        .container::before {
+            content: "";
+            display: inline-block;
+            border-bottom: 3px solid red;
+            border-left: 3px solid red;
+            width: 2vw;
+            height: 4vh;
+            position: absolute;
+            left: 1vw;
+            top: 8vw;
+        }
+
+        .container::after {
+            content: "";
+            display: inline-block;
+            border-bottom: 3px solid red;
+            border-right: 3px solid red;
+            width: 2vw;
+            height: 4vh;
+            position: absolute;
+            left: 8vw;
+            top: 8vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>cool border</h1>
+        </div>
+    </div>
+
+</body>
+
+</html>
