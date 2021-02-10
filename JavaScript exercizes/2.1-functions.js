@@ -6,4 +6,4 @@ let a = describeCountry('finland', ' 6 milion', 'some capital');
 let b = describeCountry('dddfs', ' 8 milion', 'some capital');
 let c = describeCountry('wefwefwef', ' 12 milion', 'some capital');
 
-console.log(a + b + c)
+console.log(a + b + c);

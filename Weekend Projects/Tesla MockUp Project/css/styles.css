@@ -1,0 +1,384 @@
+@font-face {
+  font-family: "Gotham Book";
+  src: url("../Gotham-Font/GothamBook.ttf");
+}
+
+@font-face {
+  font-family: "Gotham Medium";
+  src: url("../Gotham-Font/GothamMedium.ttf");
+  src: url("../Gotham-Font/GothamMedium_1.ttf");
+}
+
+@font-face {
+  font-family: "Gotham Light";
+  src: url("../Gotham-Font/GothamLight.ttf");
+  /* src: url('../Gotham-Font/GothamLightItalic.ttf'); */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Styling */
+html,
+body {
+  font-family: "Gotham Book", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 21px;
+  font-size: 14px;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2em;
+}
+
+i {
+  color: #fff;
+}
+
+h1 {
+  font-family: "Gotham Medium";
+}
+h2 {
+  font-family: "Gotham Light";
+}
+p {
+  font-family: "Gotham Book";
+}
+
+/* Utillities */
+.container {
+  margin: auto;
+  max-width: 100vw;
+  overflow: auto;
+  padding: 0 20px;
+}
+
+.btn {
+  width: 150px;
+  height: 40px;
+  border-radius: 30px;
+  border: 4px solid #fff;
+  color: #fff;
+  background: transparent;
+}
+
+.btn:hover {
+  color: black;
+  background: #fff;
+  cursor: pointer;
+}
+
+.logo {
+  position: fixed;
+}
+
+.vl {
+  border-left: 1px solid white;
+  height: 80px;
+  width: 6px;
+  display: inline-block;
+}
+
+/* Navbar */
+#navbar h1 {
+  float: left;
+  padding-top: 10px;
+  position: fixed;
+}
+
+#navbar h1 img {
+  width: 120px;
+  height: 1.5em;
+}
+
+#navbar .nav-middle ul {
+  list-style: none;
+  float: left;
+  margin-left: 22%;
+}
+
+#navbar .nav-right ul {
+  list-style: none;
+  float: right;
+}
+
+#navbar ul li {
+  float: left;
+  font-family: "Gotham Medium";
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 10px;
+  text-align: center;
+}
+
+/* First Section */
+
+header {
+  background: url("../img/tesla-1.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+
+header .container .headline {
+  display: block;
+  margin: 50px auto 27%;
+  text-align: center;
+  color: #fff;
+  font-size: 1.7em;
+  position: absolute;
+  left: 36%;
+  bottom: 50px;
+  width: 200px;
+}
+header .container .car-details {
+  display: block;
+}
+
+header .container .car-details {
+  text-align: center;
+  /* align-items: center; */
+  position: absolute;
+  bottom: 70px;
+  left: 25%;
+}
+
+header .container .car-details .box {
+  display: inline-block;
+  margin: 0 25px;
+}
+
+header .container .car-details .box h2,
+header .container .car-details .box h3 {
+  color: #fff;
+  margin: auto;
+  display: block;
+  padding-top: 8px;
+}
+
+header .container .car-details .box h2 {
+  padding-bottom: 5px;
+}
+
+header .container .car-details .box h3 {
+  font-size: 1em;
+  font-weight: 100;
+}
+
+header .container .car-details .box h1 {
+  display: block;
+  margin: 50px 0;
+  font-size: 4em;
+  padding: 50px 0;
+}
+
+header .container .btn {
+  position: relative;
+  bottom: 20px;
+}
+
+/* Second Page */
+.second-pg .container {
+  overflow: hidden;
+}
+
+.second-pg .container img {
+  float: left;
+  width: 12%;
+  height: 3em;
+  padding-top: 10px;
+  overflow: unset;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.second-pg .var-img {
+  background-color: #f2f2f2;
+  position: relative;
+  left: 20px;
+}
+
+.second-pg .var-img img {
+  float: right;
+  width: 65vw;
+  height: 100vh;
+  margin-right: 0;
+}
+
+.second-pg .safety-exp {
+  display: inline-block;
+  width: 26vw;
+  margin: 15px auto 30px 30px;
+}
+
+.second-pg .safety-exp h3 {
+  font-weight: 100;
+  margin: 5px 0;
+  font-size: 1.5em;
+  font-family: "Gotham Light";
+}
+
+.second-pg .safety-exp h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-family: "Gotham Medium";
+  font-weight: 300;
+}
+
+.second-pg .safety-exp p {
+  margin: 90px 0;
+  font-family: "Gotham Book";
+}
+
+.second-pg .btns {
+  margin-top: 150px;
+}
+
+.second-pg .btns #learn-more {
+  width: 10px;
+  border: 2px solid white;
+  background: #fff;
+  height: 40px;
+  margin: auto 5px auto 0;
+}
+
+.btns #plus {
+  background-color: #fff;
+  border: none;
+}
+
+.btns i {
+  color: grey;
+}
+
+.btns i:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.second-pg .btns .btn {
+  border: 2px black solid;
+  color: black;
+  float: right;
+}
+
+.second-pg .btns .btn:hover {
+  color: #fff;
+  background: black;
+}
+
+/* Third Page */
+ .container {
+  padding: 0;
+  height: 100vh;
+}
+
+.third-pg .img-header {
+  background: url("../img/tesla-3.jpg") center;
+  width: 100%;
+  height: 62vh;
+  overflow: hidden;
+}
+
+ .img-header .car-descrip {
+  text-align: center;
+  position: relative;
+  top: 230px;
+}
+
+ .img-header .car-descrip h2,
+ .img-header .car-descrip p {
+  text-align: left;
+}
+
+ .img-header .car-descrip h2 {
+  font-size: 1.8em;
+  padding-bottom: 10px;
+}
+
+ .img-header .car-descrip p {
+  font-size: 0.9em;
+  font-weight: bolder;
+}
+
+ .img-header .car-descrip .box {
+  display: inline-block;
+  width: 25%;
+  color: #fff;
+}
+
+ .container .acceleration {
+  display: inline-block;
+  width: 380px;
+  margin-left: 10%;
+  margin-top: 50px;
+}
+
+ .container .acceleration h2 {
+  font-weight: 100;
+  font-family: "Gotham Light";
+}
+
+ .container .acceleration h1 {
+  font-family: "Gotham Medium";
+  margin: 5px auto 25px;
+  font-weight: lighter;
+  font-size: 2em;
+}
+
+ .container .acceleration .btn {
+  border: 2px solid black;
+  color: black;
+  margin-left: 15px;
+}
+
+ .container .acceleration .btn:hover {
+  background-color: black;
+  color: #fff;
+}
+
+ .container .descrip {
+  width: 44%;
+  float: right;
+  margin-right: 15%;
+  margin-top: 58px;
+  color: rgb(116, 115, 115);
+}
+
+
+/* Fourth Section */
+
+.fourth-pg .img-header {
+  background: url("../img/tesla-4.jpg") center;
+  width: 100%;
+  height: 62vh;
+}
+
+.fourth-pg .container .acceleration {
+  width: 200px;
+  margin-left: 12%;
+}
+
+.fourth-pg .container .acceleration .btn {
+  margin-left: 0;
+}
+
+.fourth-pg .container .acceleration h2 {
+  font-size: 1.3em;
+}
+
+.fourth-pg .container .descrip {
+  width: 50%;
+  font-size: 1em;
+  font-weight: bolder;
+  margin-right: 10%;
+  margin-top: 70px;
+}
