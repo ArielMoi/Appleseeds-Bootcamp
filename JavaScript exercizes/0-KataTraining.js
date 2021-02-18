@@ -38,21 +38,16 @@ function incrementString(strng) {
         if (num.length == 0) {
             return `${strng.slice(0, strng.length - 1)}1`
         }
-        //  console.log(num)
+
         let index = strng.indexOf(num[0]);
-
-
         num = parseInt(num.join('')) + 1;
 
         let strng1 = strng.slice(0, index) + parseInt(num);
-        //console.log(strng + '   ' + strng1)
         if (strng1.length > strng.length) {
             if (strng.slice(0, index).includes('0')) {
-                //return strng1;
                 return strng.slice(0, index - 1) + parseInt(num)
             }
         }
-
         return strng.slice(0, index) + parseInt(num);
     }
 }
