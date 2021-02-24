@@ -5,61 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <style>
-        .container>div {
-            display: inline-block;
-        }
-    </style>
+    <title>Tickling Clock</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="box">
-            <p class="hour">00</p>
-        </div>
-        <div class="box">
-            <p>:<span class="minute">00</span></p>
-        </div>
-        <div class="box">
-            <p>:<span class="second">00</span></p>
-        </div>
-    </div>
+
+    <h1>Tickling clock</h1>
+    <h3></h3>
 
 
     <script>
-
-        const hour = document.querySelector('.hour');
-        const minute = document.querySelector('.minute');
-        const second = document.querySelector('.second');
-
-
-        function timeH(time) {
-            if (parseInt(time.textContent) == 24) {
-                time.textContent = 00;
-            } else if (parseInt(time.textContent) < 9) {
-                time.textContent = `0${parseInt(time.textContent) + 1}`;
-            } else {
-                time.textContent = parseInt(time.textContent) + 1;
-            }
-        }
-        function time(time) {
-            if (parseInt(time.textContent) == 60) {
-                time.textContent = 00;
-            } else if (parseInt(time.textContent) < 9) {
-                time.textContent = `0${parseInt(time.textContent) + 1}`;
-            } else {
-                time.textContent = parseInt(time.textContent) + 1;
-            }
-        }
-
-        setInterval('timeH(hour)', 3600000);
-        setInterval('time(minute)', 60000);
-        setInterval('time(second)', 1000);
-
-
-
+        setInterval(() => {
+            var now = new Date;
+            document.querySelector('h3').innerHTML = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}`;
+        }, 10)
     </script>
 </body>
 
