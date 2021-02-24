@@ -38,4 +38,4 @@ function moveCar(el) {
 }
 
 
-document.body.addEventListener('keypress', moveCar)
+document.body.addEventListener('keyup', moveCar)
