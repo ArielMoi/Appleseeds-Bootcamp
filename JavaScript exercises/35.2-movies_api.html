@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Searcher</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: black;
+            color: #fff;
+        }
+
+        .details {
+            text-align: center;
+            padding: 1% 15%;
+            color: #fff;
+        }
+
+        span {
+            font-size: 1.3rem;
+            color: coral
+        }
+
+        h1 {
+            align-self: center;
+        }
+
+        img {
+            border-radius: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <button type="submit">Search</button>
+    <div class="details"></div>
+
+    <script>
+        const mainDiv = document.querySelector('.details');
+
+        const baseEndPoint = 'http://www.omdbapi.com/?apikey=a29f9fc5&t='
+
+        async function a(title) {
+            let firstFetch = await fetch(`${baseEndPoint}${title.split(' ').join('+')}`)
+            let data = await firstFetch.json();
+
+            const reviews = data.Ratings.map(e => Object.values(Object.values(e)))
+
+            const img = document.createElement('img');
+            img.setAttribute('src', data.Poster);
+            const titleMovie = document.createElement('h1');
+            titleMovie.insertAdjacentText('afterbegin', data.Title);
+            const details = document.createElement('p');
+            details.innerHTML = `
+            <span>Genre: </span> ${data.Genre}<br>
+            <span>year:  </span>${data.Year}<br>
+            <span>Plot: </span> ${data.Plot}<br>
+            <span>Director: </span> ${data.Director}<br>
+            <span>Actors:  </span>${data.Actors}<br>
+            <span>Ratings: </span><br>
+            <span>IMDB </span>${reviews[0][1]}<br>
+            <span>rotten tomatoes </span> ${reviews[1][1]}<br>
+            `;
+
+            mainDiv.appendChild(img);
+            mainDiv.appendChild(titleMovie);
+            mainDiv.appendChild(details);
+        }
+
+        const button = document.querySelector('button');
+        const input = document.querySelector('input');
+        const h1 = document.createElement('h1');
+        h1.insertAdjacentText('afterbegin', 'MOVIE NOT FOUND, TRY AGAIN')
+        button.addEventListener('click', () => {
+            mainDiv.innerHTML = '';
+            a(input.value).catch(() => {
+                mainDiv.appendChild(h1)
+            })
+            input.value = '';
+        })
+
+
+    </script>
+</body>
+
+</html>

@@ -6,18 +6,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>github api</title>
+    <style>
+        .details {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .details>* {
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
 
     <input type="text">
     <button type="submit">Search</button>
-
-
-
-
+    <div class="details"></div>
 
     <script>
+        const baseEndPoint = 'https://api.github.com/users/';
+
+        async function fetchingGitHub(name) {
+
+            let firstFetch = await fetch(`${baseEndPoint}${name}`);
+            let data = await firstFetch.json();
+
+            if (data.message == 'Not Found') {
+                let div = document.createElement('div');
+                let h1 = document.createElement('h1');
+                h1.insertAdjacentText('afterbegin', 'not found');
+                div.appendChild(h1);
+                document.querySelector('.details').appendChild(div);
+                throw 'user name not found';
+            } else {
+
+                let div = document.createElement('div');
+                let img = document.createElement('img');
+                let h1 = document.createElement('h1');
+                let p = document.createElement('p');
+                let a = document.createElement('a');
+
+                a.setAttribute('href', data.html_url);
+
+                img.style.width = '200px';
+                img.setAttribute('src', data.avatar_url)
+                h1.insertAdjacentText('afterbegin', data.name);
+                p.insertAdjacentText('afterbegin', data.id);
+
+                div.appendChild(img);
+                div.appendChild(h1);
+                div.appendChild(p);
+                a.appendChild(div)
+                document.querySelector('.details').appendChild(a);
+
+                console.log(data)
+            }
+
+        }
+
+        const arrOfNames = [];
+        document.querySelector('button').addEventListener('click', () => {
+            let userName = document.querySelector('input').value;
+
+
+            if (!arrOfNames.includes(userName)) {
+                arrOfNames.push(userName)
+                fetchingGitHub(userName)
+
+            }
+            document.querySelector('input').value = '';
+        })
 
     </script>
 </body>
