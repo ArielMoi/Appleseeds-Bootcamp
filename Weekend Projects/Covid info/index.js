@@ -1,79 +1,56 @@
 /// fetch function
 const myProxy = 'https://api.codetabs.com/v1/proxy?quest=';
 
+const regionInfo = {};
 const coronaInfo = {};
-const africa = {};
-const america = {};
-const asia = {};
-const europe = {};
-const oceania = {};
 
+let currentRegionInfo = [];
 
 async function fetchCountriesByregion() {
     let data = await fetch(`${myProxy}https://restcountries.herokuapp.com/api/v1`);
     data = await data.json();
     data.forEach(el => {
-        if (el.region == ''){el.region = 'World'}
-        coronaInfo[el.region] ? coronaInfo[el.region] += `-${el.name.common}` : coronaInfo[el.region] = `-${el.name.common}`;
+        if (el.region == '') {
+            el.region = 'Oceania'
+        }
+        regionInfo[el.region] ? regionInfo[el.region] += `-${el.name.common}` : regionInfo[el.region] = `-${el.name.common}`;
     })
 
-    for (let [region, country] of Object.entries(coronaInfo)) {
-        // if (region == ''){region = 'world'}
-        coronaInfo[region] = country.split('-');
+    for (let [region, country] of Object.entries(regionInfo)) { // make values as arr
+        regionInfo[region] = country.split('-');
     }
 }
 
-fetchCountriesByregion().then(() => {
-    console.log(coronaInfo)
-})
-
-
-async function fetchCovidInfoByCountry(){
+async function fetchCovidInfoByCountry() {
     let dataCovid = await fetch(`https://corona-api.com/countries`);
     dataCovid = await dataCovid.json();
 
-    console.log(dataCovid);
-
+    dataCovid.data.forEach(el => {
+        coronaInfo[el.name] = [el.latest_data.confirmed, el.latest_data.recovered, el.latest_data.critical, el.latest_data.deaths]
+    })
 }
 
-fetchCovidInfoByCountry()
 
-// console.log(coronaInfo)
+fetchCountriesByregion().then(() => {
+    fetchCovidInfoByCountry().then(() => {
 
-// console.log(Object.entries(Object.values(coronaInfo)))
+        console.log(regionInfo)
+        console.log(coronaInfo)
 
+        getInfoByregion('Africa');
 
+        
+        console.log(Object.values(currentRegionInfo)[5][1])
 
+    })
+})
 
-// coronaInfo.each(el => {
-//     console.log('--')
-//     console.log(el)
-// })
-
-// let data = fetchURLs(myProxy + 'https://restcountries.herokuapp.com/api/v1')
-
-
-// let data = fetchURLs(`${myProxy}https://restcountries.herokuapp.com/api/v1`)
-// console.log(data)
-
-///fetching data
-
-///arranging it in the right way obj -> obj country name -> obj al corona details
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function getInfoByregion(region, typeOfInfo = 0) {
+    currentRegionInfo = []
+    regionInfo[region].forEach(el => {
+        el && currentRegionInfo.push([el, coronaInfo[el]])
+    })
+}
 
 /// creating the chart - 
 
@@ -116,3 +93,19 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+function removeData(chart) {
+    chart.data.labels = '';
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = '';
+    });
+    chart.update();
+}
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
