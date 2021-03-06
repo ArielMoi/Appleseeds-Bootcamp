@@ -6,7 +6,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 2fr;
 }
 
 .container > div {
@@ -41,8 +41,9 @@ button:focus {
 }
 
 .countries {
-  border: 1px solid black;
   width: 10vw;
-  height: 30vh;
-  overflow: scroll;
+  height: 15vh;
+  overflow: visible;
+  overflow-x: hidden;
+  margin: auto;
 }

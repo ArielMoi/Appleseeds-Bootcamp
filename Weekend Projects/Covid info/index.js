@@ -32,18 +32,6 @@ async function fetchCovidInfoByCountry() {
     })
 }
 
-function getInfoByregion(region, typeOfInfo = 0) {
-    currentRegionInfo = []
-    regionInfo[region].forEach(el => {
-        el && currentRegionInfo.push([el, coronaInfo[el]])
-    })
-
-    currentRegionInfo = Object.values(currentRegionInfo).filter((el) => { /// filter un defined prevents bugs
-        if (el[1]){
-            return true;
-        } else false;
-    })
-}
 
 fetchCountriesByregion().then(() => { // active collection of data.
     fetchCovidInfoByCountry()
@@ -55,28 +43,14 @@ fetchCountriesByregion().then(() => { // active collection of data.
 
 var chart = document.getElementById('myChart').getContext('2d'); // the chart
 var myChart = new Chart(chart, { /// creating chart with chart js
-    type: 'line',
+    type: 'bar',
     data: {
         labels: [],
         datasets: [{
             label: 'Covis-19 World Wide Information',
             data: [],
-            backgroundColor: [
-                // 'rgba(255, 99, 132, 0.2)',
-                // 'rgba(54, 162, 235, 0.2)',
-                // 'rgba(255, 206, 86, 0.2)', /// commented because becomes irrelevant from too many data
-                // 'rgba(75, 192, 192, 0.2)',
-                // 'rgba(153, 102, 255, 0.2)',
-                // 'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                // 'rgba(255, 99, 132, 1)',
-                // 'rgba(54, 162, 235, 1)',
-                // 'rgba(255, 206, 86, 1)',
-                // 'rgba(75, 192, 192, 1)',
-                // 'rgba(153, 102, 255, 1)',
-                // 'rgba(255, 159, 64, 1)'
-            ],
+            backgroundColor: [],
+            borderColor: [],
             borderWidth: 1
         }]
     },
@@ -108,68 +82,137 @@ function addData(chart, label, data) { // add data to chart (one in a time so ne
     chart.update();
 }
 
+// collecting info by region function used with the objects already constructed from the fetch.
+function getInfoByregion(region, typeOfInfo = 0) {
+    currentRegionInfo = []
+    regionInfo[region].forEach(el => {
+        el && currentRegionInfo.push([el, coronaInfo[el]])
+    })
+
+    currentRegionInfo = Object.values(currentRegionInfo).filter((el) => { /// filter undefineds prevents bugs
+        if (el[1]){
+            return true;
+        } else false;
+    })
+}
 
 // --- functions to update the chart per region or data ---
 let currentDataType = 0;
+let currentRegion;
 
 function updateDataByRegion(region){
     getInfoByregion(region);
     removeData(myChart);
 
-    for (let info of Object.values(currentRegionInfo)){ // ---- creating the chart
-        info[1][currentDataType] && /// info[0] -> country name. info[1] covid data info[1][i] -> covid specific data
+    for (let info of Object.values(currentRegionInfo)){ // ---- updating the chart
+        info[1][currentDataType] && /// info[0] -> country name. info[1] -> covid data. info[1][i] -> covid specific data (from 0 to 3)
         addData(myChart, info[0], info[1][currentDataType])
     }
 }
 
 function updateDataType(dataType) {
     removeData(myChart);
-    currentDataType = dataType;
+    currentDataType = dataType; // for future refrence and updatinng header
     for (let info of Object.values(currentRegionInfo)){ 
         info[1][dataType] && 
         addData(myChart, info[0], info[1][dataType])
     }
 }
 
+function updateHeadline(country, data){
+    switch (data){
+        case 0:
+            data = 'Confirmed';
+            break;
+        case 1:
+            data = 'Recovered';
+            break;
+        case 2:
+            data = 'Critical';
+            break;
+        case 3:
+            data = 'Deaths';
+            break;
+    }
+    myChart.data.datasets[0].label = `${country} - ${data}`
+    myChart.update();    
+}
+
+// update names listing of countries per region
+
+function updateRegionCountryNames(region){
+    let currentRegionCountries = []
+    regionInfo[region].forEach(el => {
+        el && currentRegionCountries.push(el)
+    })
+
+    for (let country of currentRegionCountries){
+        document.querySelector('p').innerHTML = '';
+        document.querySelector('p').insertAdjacentHTML('afterend', country + '<br>');
+    }
+
+}
 
 /// --- creating event listners on buttons. ---
 const [confirmedButton, deathsButton, recoveredButton, criticalButton,
 asiaButton, europeButton, africaButton, americaButton, oceaniaButton] = document.querySelectorAll('button');
 
 asiaButton.addEventListener('click', () => {
-    updateDataByRegion('Asia')
+    currentRegion ='Asia';
+    updateDataByRegion(currentRegion)
+    updateRegionCountryNames('Asia')
+    updateHeadline(currentRegion, currentDataType);
 })
 
 europeButton.addEventListener('click', () => {
-    updateDataByRegion('Europe')
+    currentRegion ='Europe';
+    updateDataByRegion(currentRegion)
+    updateRegionCountryNames('Europe')
+    updateHeadline(currentRegion, currentDataType);
 })
 
 africaButton.addEventListener('click', () => {
-    updateDataByRegion('Africa')
+    currentRegion ='Africa';
+    updateDataByRegion(currentRegion)
+    updateRegionCountryNames('Africa')
+    updateHeadline(currentRegion, currentDataType);
 })
 
 americaButton.addEventListener('click', () => {
-    updateDataByRegion('Americas')
+    currentRegion ='Americas';
+    updateDataByRegion(currentRegion)
+    updateRegionCountryNames('Americas')
+    updateHeadline(currentRegion, currentDataType);
 })
 
 oceaniaButton.addEventListener('click', () => {
-    updateDataByRegion('Oceania');
+    currentRegion ='Oceania';
+    updateDataByRegion(currentRegion);
+    updateRegionCountryNames('Oceania')
+    updateHeadline(currentRegion, currentDataType);
 })
 
 
 confirmedButton.addEventListener('click', () => {
-    updateDataType(0)
+    currentDataType = 0;
+    updateDataType(currentDataType)
+    updateHeadline(currentRegion, currentDataType);
 })
 
 criticalButton.addEventListener('click', () => {
-    updateDataType(2);
+    currentDataType = 2;
+    updateDataType(currentDataType);
+    updateHeadline(currentRegion, currentDataType);
 })
 
-
 deathsButton.addEventListener('click', () => {
-    updateDataType(3);
+    currentDataType = 3;
+    updateDataType(currentDataType);
+    updateHeadline(currentRegion, currentDataType);
 })
 
 recoveredButton.addEventListener('click', () => {
-    updateDataType(1);
+    currentDataType = 1;
+    updateDataType(currentDataType);
+    updateHeadline(currentRegion, currentDataType);
 })
