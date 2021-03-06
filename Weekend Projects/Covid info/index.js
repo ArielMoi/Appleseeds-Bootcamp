@@ -90,7 +90,7 @@ function getInfoByregion(region, typeOfInfo = 0) {
     })
 
     currentRegionInfo = Object.values(currentRegionInfo).filter((el) => { /// filter undefineds prevents bugs
-        if (el[1]){
+        if (el[1]) {
             return true;
         } else false;
     })
@@ -100,27 +100,27 @@ function getInfoByregion(region, typeOfInfo = 0) {
 let currentDataType = 0;
 let currentRegion;
 
-function updateDataByRegion(region){
+function updateDataByRegion(region) {
     getInfoByregion(region);
     removeData(myChart);
 
-    for (let info of Object.values(currentRegionInfo)){ // ---- updating the chart
+    for (let info of Object.values(currentRegionInfo)) { // ---- updating the chart
         info[1][currentDataType] && /// info[0] -> country name. info[1] -> covid data. info[1][i] -> covid specific data (from 0 to 3)
-        addData(myChart, info[0], info[1][currentDataType])
+            addData(myChart, info[0], info[1][currentDataType])
     }
 }
 
 function updateDataType(dataType) {
     removeData(myChart);
     currentDataType = dataType; // for future refrence and updatinng header
-    for (let info of Object.values(currentRegionInfo)){ 
-        info[1][dataType] && 
-        addData(myChart, info[0], info[1][dataType])
+    for (let info of Object.values(currentRegionInfo)) {
+        info[1][dataType] &&
+            addData(myChart, info[0], info[1][dataType])
     }
 }
 
-function updateHeadline(country, data){
-    switch (data){
+function updateHeadline(country, data) {
+    switch (data) {
         case 0:
             data = 'Confirmed';
             break;
@@ -135,58 +135,69 @@ function updateHeadline(country, data){
             break;
     }
     myChart.data.datasets[0].label = `${country} - ${data}`
-    myChart.update();    
+    myChart.update();
 }
 
 // update names listing of countries per region
 
-function updateRegionCountryNames(region){
+function updateRegionCountryNames(region) {
     let currentRegionCountries = []
     regionInfo[region].forEach(el => {
         el && currentRegionCountries.push(el)
     })
 
-    for (let country of currentRegionCountries){
-        document.querySelector('p').innerHTML = '';
-        document.querySelector('p').insertAdjacentHTML('afterend', country + '<br>');
+    document.querySelector('.countries-of-region').innerHTML = ''; // removing prior countries
+    for (let country of currentRegionCountries) {
+        document.querySelector('.countries-of-region').insertAdjacentHTML('beforeend', `<p class='${country}'>${country}</p><br><br>`);
     }
+}
 
+// make sure chart is visible. prevents leaving her hidden after showing country info
+function showChart() {
+    document.querySelector('.chart-container').style.visibility = 'visible';
+    document.querySelector('.country-info').style.visibility = 'hidden';
 }
 
 /// --- creating event listners on buttons. ---
 const [confirmedButton, deathsButton, recoveredButton, criticalButton,
-asiaButton, europeButton, africaButton, americaButton, oceaniaButton] = document.querySelectorAll('button');
+    asiaButton, europeButton, africaButton, americaButton, oceaniaButton
+] = document.querySelectorAll('button');
 
 asiaButton.addEventListener('click', () => {
-    currentRegion ='Asia';
+    showChart();
+    currentRegion = 'Asia';
     updateDataByRegion(currentRegion)
     updateRegionCountryNames('Asia')
     updateHeadline(currentRegion, currentDataType);
 })
 
 europeButton.addEventListener('click', () => {
-    currentRegion ='Europe';
+    showChart();
+    currentRegion = 'Europe';
     updateDataByRegion(currentRegion)
     updateRegionCountryNames('Europe')
     updateHeadline(currentRegion, currentDataType);
 })
 
 africaButton.addEventListener('click', () => {
-    currentRegion ='Africa';
+    showChart();
+    currentRegion = 'Africa';
     updateDataByRegion(currentRegion)
     updateRegionCountryNames('Africa')
     updateHeadline(currentRegion, currentDataType);
 })
 
 americaButton.addEventListener('click', () => {
-    currentRegion ='Americas';
+    showChart();
+    currentRegion = 'Americas';
     updateDataByRegion(currentRegion)
     updateRegionCountryNames('Americas')
     updateHeadline(currentRegion, currentDataType);
 })
 
 oceaniaButton.addEventListener('click', () => {
-    currentRegion ='Oceania';
+    showChart();
+    currentRegion = 'Oceania';
     updateDataByRegion(currentRegion);
     updateRegionCountryNames('Oceania')
     updateHeadline(currentRegion, currentDataType);
@@ -194,25 +205,45 @@ oceaniaButton.addEventListener('click', () => {
 
 
 confirmedButton.addEventListener('click', () => {
+    showChart();
     currentDataType = 0;
     updateDataType(currentDataType)
     updateHeadline(currentRegion, currentDataType);
 })
 
 criticalButton.addEventListener('click', () => {
+    showChart();
     currentDataType = 2;
     updateDataType(currentDataType);
     updateHeadline(currentRegion, currentDataType);
 })
 
 deathsButton.addEventListener('click', () => {
+    showChart();
     currentDataType = 3;
     updateDataType(currentDataType);
     updateHeadline(currentRegion, currentDataType);
 })
 
 recoveredButton.addEventListener('click', () => {
+    showChart();
     currentDataType = 1;
     updateDataType(currentDataType);
     updateHeadline(currentRegion, currentDataType);
+})
+
+document.querySelector('.countries').addEventListener('click', (el) => { // show info for each country
+    document.querySelector('.chart-container').style.visibility = 'hidden'; // makes chart hidden and country info visible
+    document.querySelector('.country-info').style.visibility = 'visible';
+
+    let countryInfo = document.querySelector('.country-info')
+    if (el.target.innerText.length < 30) { // prevents updating inner text to all countries in region (when target is the all div)
+        countryInfo.querySelector('h1').innerText = `${el.target.innerText} Covid-19 Info:`;
+    }
+
+    let [confirmed, deaths, recovered, critical] = countryInfo.querySelectorAll('p'); // selecting all p to use for info
+    confirmed.innerText = coronaInfo[el.target.innerText][0];
+    deaths.innerText = coronaInfo[el.target.innerText][3];
+    recovered.innerText = coronaInfo[el.target.innerText][1];
+    critical.innerText = coronaInfo[el.target.innerText][2];
 })
