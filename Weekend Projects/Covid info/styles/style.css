@@ -46,11 +46,21 @@ button:focus {
 
 .countries {
   width: 10vw;
-  height: 15vh;
+  height: 20vh;
   overflow: visible;
   overflow-x: hidden;
   margin: auto;
   z-index: 1;
+}
+
+.countries p {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.countries p:hover {
+  background: rgba(128, 128, 128, 0.76);
+  color: #fff;
 }
 
 .chart-container {
@@ -89,5 +99,5 @@ button:focus {
 .country-info h1 {
   position: absolute;
   top: 30vh;
-  right: 30vw;
+  right: 10vw;
 }
