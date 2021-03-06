@@ -203,7 +203,6 @@ oceaniaButton.addEventListener('click', () => {
     updateHeadline(currentRegion, currentDataType);
 })
 
-
 confirmedButton.addEventListener('click', () => {
     showChart();
     currentDataType = 0;
@@ -232,6 +231,7 @@ recoveredButton.addEventListener('click', () => {
     updateHeadline(currentRegion, currentDataType);
 })
 
+// show case the specific country corona details - not in the chart but through divs with text 
 document.querySelector('.countries').addEventListener('click', (el) => { // show info for each country
     document.querySelector('.chart-container').style.visibility = 'hidden'; // makes chart hidden and country info visible
     document.querySelector('.country-info').style.visibility = 'visible';
