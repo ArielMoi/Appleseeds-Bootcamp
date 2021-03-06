@@ -12,24 +12,32 @@
 <body>
 
     <div class="container">
-        <canvas id="myChart"></canvas>
 
-        <div class="buttons--data-type">
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+        <div class="buttons">
+            <div>
+                <button>Confirmed</button>
+                <button>Deaths</button>
+                <button>Recovered</button>
+                <button>Criticla</button>
+            </div>
+            <div>
+                <button>Asia</button>
+                <button>Europe</button>
+                <button>Africa</button>
+                <button>Americas</button>
+                <button>Oceania</button>
+            </div>
+            <div class="countries"></div>
         </div>
-        <div class="buttons--region">
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
-            <button></button>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
         </div>
-        <div class="countries"></div>
 
     </div>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="index.js"></script>
 
