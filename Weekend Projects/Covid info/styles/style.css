@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  text-align: center;
   margin: 0 10px;
 }
 
@@ -38,4 +38,11 @@ button:focus {
   box-shadow: 0 0 10px black;
   background-color: rgba(0, 0, 0, 0.623);
   color: #fff;
+}
+
+.countries {
+  border: 1px solid black;
+  width: 10vw;
+  height: 30vh;
+  overflow: scroll;
 }

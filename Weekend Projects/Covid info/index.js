@@ -1,4 +1,6 @@
-/// fetch function
+/// fetch functions
+
+//  --------- collectiong data from APIs -------------
 const myProxy = 'https://api.codetabs.com/v1/proxy?quest=';
 
 const regionInfo = {};
@@ -30,26 +32,6 @@ async function fetchCovidInfoByCountry() {
     })
 }
 
-
-fetchCountriesByregion().then(() => {
-    fetchCovidInfoByCountry().then(() => {
-
-        // console.log(regionInfo)
-        // console.log(coronaInfo)
-
-        getInfoByregion('Africa');
-
-        // console.log(Object.values(currentRegionInfo))
-
-        for (let info of Object.values(currentRegionInfo)){ // ---- creating the chart
-            // console.log(info)
-            info[1][0] && /// info[0] -> country name. info[1] covid data info[1][i] -> covid specific data
-            addData(myChart, info[0], info[1][0])
-        }
-
-    })
-})
-
 function getInfoByregion(region, typeOfInfo = 0) {
     currentRegionInfo = []
     regionInfo[region].forEach(el => {
@@ -63,10 +45,16 @@ function getInfoByregion(region, typeOfInfo = 0) {
     })
 }
 
+fetchCountriesByregion().then(() => { // active collection of data.
+    fetchCovidInfoByCountry()
+})
+
+
+
 /// creating the chart - 
 
-var ctx = document.getElementById('myChart').getContext('2d'); // element from dom
-var myChart = new Chart(ctx, { /// creating chart with chart js
+var chart = document.getElementById('myChart').getContext('2d'); // the chart
+var myChart = new Chart(chart, { /// creating chart with chart js
     type: 'line',
     data: {
         labels: [],
@@ -74,7 +62,7 @@ var myChart = new Chart(ctx, { /// creating chart with chart js
             label: 'Covis-19 World Wide Information',
             data: [],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
+                // 'rgba(255, 99, 132, 0.2)',
                 // 'rgba(54, 162, 235, 0.2)',
                 // 'rgba(255, 206, 86, 0.2)', /// commented because becomes irrelevant from too many data
                 // 'rgba(75, 192, 192, 0.2)',
@@ -82,7 +70,7 @@ var myChart = new Chart(ctx, { /// creating chart with chart js
                 // 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
+                // 'rgba(255, 99, 132, 1)',
                 // 'rgba(54, 162, 235, 1)',
                 // 'rgba(255, 206, 86, 1)',
                 // 'rgba(75, 192, 192, 1)',
@@ -103,10 +91,11 @@ var myChart = new Chart(ctx, { /// creating chart with chart js
     }
 });
 
+// ---- creating chart functions ----
 function removeData(chart) { /// removes all data from chart
-    chart.data.labels = '';
+    chart.data.labels = [];
     chart.data.datasets.forEach((dataset) => {
-        dataset.data = '';
+        dataset.data = [];
     });
     chart.update();
 }
@@ -120,12 +109,67 @@ function addData(chart, label, data) { // add data to chart (one in a time so ne
 }
 
 
-/// creating event listners on buttons.
-// each button - 
-// removeData()
-// addData()  -> with current information
+// --- functions to update the chart per region or data ---
+let currentDataType = 0;
 
-// buttons of region will simply update -- currentRegionInfo
+function updateDataByRegion(region){
+    getInfoByregion(region);
+    removeData(myChart);
+
+    for (let info of Object.values(currentRegionInfo)){ // ---- creating the chart
+        info[1][currentDataType] && /// info[0] -> country name. info[1] covid data info[1][i] -> covid specific data
+        addData(myChart, info[0], info[1][currentDataType])
+    }
+}
+
+function updateDataType(dataType) {
+    removeData(myChart);
+    currentDataType = dataType;
+    for (let info of Object.values(currentRegionInfo)){ 
+        info[1][dataType] && 
+        addData(myChart, info[0], info[1][dataType])
+    }
+}
 
 
-// add all country names in the region in the HTML
+/// --- creating event listners on buttons. ---
+const [confirmedButton, deathsButton, recoveredButton, criticalButton,
+asiaButton, europeButton, africaButton, americaButton, oceaniaButton] = document.querySelectorAll('button');
+
+asiaButton.addEventListener('click', () => {
+    updateDataByRegion('Asia')
+})
+
+europeButton.addEventListener('click', () => {
+    updateDataByRegion('Europe')
+})
+
+africaButton.addEventListener('click', () => {
+    updateDataByRegion('Africa')
+})
+
+americaButton.addEventListener('click', () => {
+    updateDataByRegion('Americas')
+})
+
+oceaniaButton.addEventListener('click', () => {
+    updateDataByRegion('Oceania');
+})
+
+
+confirmedButton.addEventListener('click', () => {
+    updateDataType(0)
+})
+
+criticalButton.addEventListener('click', () => {
+    updateDataType(2);
+})
+
+
+deathsButton.addEventListener('click', () => {
+    updateDataType(3);
+})
+
+recoveredButton.addEventListener('click', () => {
+    updateDataType(1);
+})
