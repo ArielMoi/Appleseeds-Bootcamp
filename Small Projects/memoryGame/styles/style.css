@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* header - Nav */
+ol {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.747);
+  color: #fff;
+  display: flex;
+}
+
+ol li {
+  list-style: none;
+  display: inline-block;
+  margin: auto;
+  cursor: pointer;
+  padding: 5px 10vw 5px 10vw;
+}
+
+ol li:hover {
+  color: orchid;
+  background: #fff;
+}
+
+button {
+  background: orchid;
+  color: #fff;
+  padding: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fff;
+  color: orchid;
+}
+
+/* Game */
+.game-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.game-container > div {
+  border-radius: 20%;
+  height: 150px;
+  width: 100px;
+  margin: 5px 7vw;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+}
+
+/* winning message */
+.game-container h1 {
+  position: absolute;
+  color: #fff;
+  top: 35vh;
+  left: 39vw;
+  background: orchid;
+  padding: 50px;
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* timer */
+p {
+  padding: 5ox;
+  color: orchid;
+  position: absolute;
+  top: 8vh;
+  margin-left: 10px;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 50%;
+}

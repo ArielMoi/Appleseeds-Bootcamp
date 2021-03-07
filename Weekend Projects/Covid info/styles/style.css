@@ -109,7 +109,7 @@ button:focus {
   right: 10vw;
 }
 
-/* for mobile */
+/* for mobile - max 830px */
 
 @media (max-width: 830px) {
   .container {

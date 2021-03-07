@@ -49,8 +49,8 @@ var myChart = new Chart(chart, { /// creating chart with chart js
         datasets: [{
             label: 'Covis-19 World Wide Information',
             data: [],
-            backgroundColor:[] ,
-            borderColor:[] ,
+            backgroundColor: [],
+            borderColor: [],
             borderWidth: 1
         }]
     },
@@ -115,7 +115,7 @@ function updateDataType(dataType) {
     currentDataType = dataType; // for future refrence and updatinng header
     for (let info of Object.values(currentRegionInfo)) {
         info[1][dataType] && // if there is info on the country then
-            addData(myChart, info[0], info[1][dataType]) 
+            addData(myChart, info[0], info[1][dataType])
     }
 }
 
@@ -158,97 +158,83 @@ function showChart() {
     document.querySelector('.country-info').style.visibility = 'hidden';
 }
 
-/// --- creating event listners on buttons. ---
-const [confirmedButton, deathsButton, recoveredButton, criticalButton,
-    asiaButton, europeButton, africaButton, americaButton, oceaniaButton
-] = document.querySelectorAll('button');
-
-asiaButton.addEventListener('click', () => {
-    myChart.data.datasets[0].backgroundColor = 'rgba(68, 127, 151, 0.541)'; // updates chart color
-    myChart.data.datasets[0].borderColor = 'rgb(68, 128, 151)';
-    document.querySelector('.container').style.color = 'rgb(68, 128, 151)';
-
-    showChart();
-    currentRegion = 'Asia';
-    updateDataByRegion(currentRegion)
-    updateRegionCountryNames('Asia')
+// function to update data type shown in chart (listner to buttons)
+function updateDataTypeChart() {
+    showChart(); // make sure the chart is shown (and not specifit country details)
+    updateDataType(currentDataType);
     updateHeadline(currentRegion, currentDataType);
-})
+}
 
-europeButton.addEventListener('click', () => {
-    myChart.data.datasets[0].backgroundColor = 'rgba(73, 50, 38, 0.438)'; // updates chart color
-    myChart.data.datasets[0].borderColor = 'rgb(139, 70, 58)';
-    document.querySelector('.container').style.color = 'rgb(139, 70, 58)';
-
+/// update chart and countries listing by current region selected
+function updateRegionChart(){
+    switch (currentRegion){ /// update colors per region.. creates more beautiful layout
+        case 'Oceania':
+            [myChart.data.datasets[0].backgroundColor, myChart.data.datasets[0].borderColor] = ['rgba(133, 63, 28, 0.555)', 'rgb(228, 110, 51)'];
+            document.querySelector('.container').style.color = 'rgb(228, 110, 51)';
+            break;
+        case 'Americas':
+            [myChart.data.datasets[0].backgroundColor, myChart.data.datasets[0].borderColor] = ['rgba(100, 105, 49, 0.445)', 'rgb(100, 105, 49)'];
+            document.querySelector('.container').style.color = 'rgb(100, 105, 49)';
+            break;
+        case 'Africa':
+            [myChart.data.datasets[0].backgroundColor, myChart.data.datasets[0].borderColor] = ['rgba(59, 121, 59, 0.541)', 'rgb(59, 121, 59)'];
+            document.querySelector('.container').style.color = 'rgb(59, 121, 59)';
+            break;
+        case 'Europe':
+            [myChart.data.datasets[0].backgroundColor, myChart.data.datasets[0].borderColor] = ['rgba(73, 50, 38, 0.438)', 'rgb(139, 70, 58)'];
+            document.querySelector('.container').style.color = 'rgb(139, 70, 58)';
+            break;
+        case 'Asia':
+            [myChart.data.datasets[0].backgroundColor, myChart.data.datasets[0].borderColor] = ['rgba(68, 127, 151, 0.541)', 'rgb(68, 128, 151)'];
+            document.querySelector('.container').style.color = 'rgb(68, 128, 151)';
+            break;
+    }
     showChart();
-    currentRegion = 'Europe';
-    updateDataByRegion(currentRegion)
-    updateRegionCountryNames('Europe')
-    updateHeadline(currentRegion, currentDataType);
-})
-
-africaButton.addEventListener('click', () => {
-    myChart.data.datasets[0].backgroundColor = 'rgba(59, 121, 59, 0.541)'; // updates chart color
-    myChart.data.datasets[0].borderColor = 'rgb(59, 121, 59)';
-    document.querySelector('.container').style.color = 'rgb(59, 121, 59)';
-
-    showChart();
-    currentRegion = 'Africa';
-    updateDataByRegion(currentRegion)
-    updateRegionCountryNames('Africa')
-    updateHeadline(currentRegion, currentDataType);
-})
-
-americaButton.addEventListener('click', () => {
-    myChart.data.datasets[0].backgroundColor = 'rgba(100, 105, 49, 0.445)'; // updates chart color
-    myChart.data.datasets[0].borderColor = 'rgb(100, 105, 49)';
-    document.querySelector('.container').style.color = 'rgb(100, 105, 49)';
-
-    showChart();
-    currentRegion = 'Americas';
-    updateDataByRegion(currentRegion)
-    updateRegionCountryNames('Americas')
-    updateHeadline(currentRegion, currentDataType);
-})
-
-oceaniaButton.addEventListener('click', () => {
-    myChart.data.datasets[0].backgroundColor = 'rgba(133, 63, 28, 0.555)'; // updates chart color
-    myChart.data.datasets[0].borderColor = 'rgb(228, 110, 51)';
-    document.querySelector('.container').style.color = 'rgb(228, 110, 51)';
-
-    showChart();
-    currentRegion = 'Oceania';
     updateDataByRegion(currentRegion);
-    updateRegionCountryNames('Oceania')
+    updateRegionCountryNames(currentRegion)
     updateHeadline(currentRegion, currentDataType);
-})
+}
 
-confirmedButton.addEventListener('click', () => {
-    showChart();
-    currentDataType = 0;
-    updateDataType(currentDataType)
-    updateHeadline(currentRegion, currentDataType);
-})
-
-criticalButton.addEventListener('click', () => {
-    showChart();
-    currentDataType = 2;
-    updateDataType(currentDataType);
-    updateHeadline(currentRegion, currentDataType);
-})
-
-deathsButton.addEventListener('click', () => {
-    showChart();
-    currentDataType = 3;
-    updateDataType(currentDataType);
-    updateHeadline(currentRegion, currentDataType);
-})
-
-recoveredButton.addEventListener('click', () => {
-    showChart();
-    currentDataType = 1;
-    updateDataType(currentDataType);
-    updateHeadline(currentRegion, currentDataType);
+/// --- creating event listeners on buttons. ---
+document.querySelector('.buttons').addEventListener('click', (event) => {
+    switch (event.target.innerText){
+        case 'Asia':
+            currentRegion = 'Asia';
+            updateRegionChart()
+            break;
+        case 'Europe':
+            currentRegion = 'Europe';
+            updateRegionChart()
+            break;
+        case 'Africa':
+            currentRegion = 'Africa';
+            updateRegionChart()
+            break;
+        case 'Americas':
+            currentRegion = 'Americas';
+            updateRegionChart()
+            break;
+        case 'Oceania':
+            currentRegion = 'Oceania';
+            updateRegionChart()
+            break;
+        case 'Confirmed':
+            currentDataType = 0;
+            updateDataTypeChart()
+            break;
+        case 'Deaths':
+            currentDataType = 3;
+            updateDataTypeChart()
+            break;
+        case 'Recovered':
+            currentDataType = 1;
+            updateDataTypeChart()
+            break;
+        case 'Critical':
+            currentDataType = 2;
+            updateDataTypeChart()
+            break;
+    }
 })
 
 // show case the specific country corona details - not in the chart but through divs with text 
@@ -257,7 +243,7 @@ document.querySelector('.countries').addEventListener('click', (el) => { // show
     document.querySelector('.country-info').style.visibility = 'visible';
 
     let countryInfo = document.querySelector('.country-info')
-    if (el.target.innerText.length < 30) { // prevents updating inner text to all countries in region (when target is the all div)
+    if (el.target.innerText.length < 40) { // prevents updating inner text to all countries in region (when target is the all div)
         countryInfo.querySelector('h1').innerText = `${el.target.innerText} Covid-19 Info:`;
     }
 
