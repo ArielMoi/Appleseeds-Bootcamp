@@ -8,6 +8,10 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  background: url("../img/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .container > div {
@@ -75,13 +79,16 @@ button:focus {
   position: absolute;
   right: 0;
   top: 0;
-  background-color: #fff;
   z-index: 0;
   padding: 50px;
   width: 100%;
   justify-content: flex-end;
   align-items: center;
   visibility: hidden;
+  background: url("../img/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .country-info > div {

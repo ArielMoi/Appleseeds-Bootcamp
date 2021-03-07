@@ -49,8 +49,8 @@ var myChart = new Chart(chart, { /// creating chart with chart js
         datasets: [{
             label: 'Covis-19 World Wide Information',
             data: [],
-            backgroundColor: [],
-            borderColor: [],
+            backgroundColor:[] ,
+            borderColor:[] ,
             borderWidth: 1
         }]
     },
@@ -114,8 +114,8 @@ function updateDataType(dataType) {
     removeData(myChart);
     currentDataType = dataType; // for future refrence and updatinng header
     for (let info of Object.values(currentRegionInfo)) {
-        info[1][dataType] &&
-            addData(myChart, info[0], info[1][dataType])
+        info[1][dataType] && // if there is info on the country then
+            addData(myChart, info[0], info[1][dataType]) 
     }
 }
 
@@ -164,6 +164,9 @@ const [confirmedButton, deathsButton, recoveredButton, criticalButton,
 ] = document.querySelectorAll('button');
 
 asiaButton.addEventListener('click', () => {
+    myChart.data.datasets[0].backgroundColor = 'rgba(68, 127, 151, 0.541)'; // updates chart color
+    myChart.data.datasets[0].borderColor = 'rgb(68, 128, 151)';
+
     showChart();
     currentRegion = 'Asia';
     updateDataByRegion(currentRegion)
@@ -172,6 +175,9 @@ asiaButton.addEventListener('click', () => {
 })
 
 europeButton.addEventListener('click', () => {
+    myChart.data.datasets[0].backgroundColor = 'rgba(73, 50, 38, 0.438)'; // updates chart color
+    myChart.data.datasets[0].borderColor = 'rgb(139, 70, 58)';
+
     showChart();
     currentRegion = 'Europe';
     updateDataByRegion(currentRegion)
@@ -180,6 +186,9 @@ europeButton.addEventListener('click', () => {
 })
 
 africaButton.addEventListener('click', () => {
+    myChart.data.datasets[0].backgroundColor = 'rgba(59, 121, 59, 0.541)'; // updates chart color
+    myChart.data.datasets[0].borderColor = 'rgb(59, 121, 59)';
+
     showChart();
     currentRegion = 'Africa';
     updateDataByRegion(currentRegion)
@@ -188,6 +197,9 @@ africaButton.addEventListener('click', () => {
 })
 
 americaButton.addEventListener('click', () => {
+    myChart.data.datasets[0].backgroundColor = 'rgba(100, 105, 49, 0.445)'; // updates chart color
+    myChart.data.datasets[0].borderColor = 'rgb(100, 105, 49)';
+
     showChart();
     currentRegion = 'Americas';
     updateDataByRegion(currentRegion)
@@ -196,6 +208,9 @@ americaButton.addEventListener('click', () => {
 })
 
 oceaniaButton.addEventListener('click', () => {
+    myChart.data.datasets[0].backgroundColor = 'rgba(133, 63, 28, 0.555)'; // updates chart color
+    myChart.data.datasets[0].borderColor = 'rgb(228, 110, 51)';
+
     showChart();
     currentRegion = 'Oceania';
     updateDataByRegion(currentRegion);
