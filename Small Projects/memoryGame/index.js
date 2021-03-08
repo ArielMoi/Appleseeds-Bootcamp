@@ -66,7 +66,7 @@ function checkIfUserWon() {
     if (matchesRevealed == amountOfCards / 2) { // compare the amount of matches revealed to the amount of cards
         finalScore = timeOfGame;
         winMessage.style.visibility = 'visible';
-        winMessage.innerHTML = `YOU WON!!<br>it took you ${finalScore}s`
+        document.querySelector('.win-message h1').innerHTML = `YOU WON!!<br>it took you ${finalScore}s`
         timeOfGame = 0;
     }
 }
@@ -123,6 +123,7 @@ const submitButtonToScoreBoard = document.querySelector('card button');
 let finalScore = 0;
 
 submitButtonToScoreBoard.addEventListener('click', () => {  
+    console.log('----')
     updateScoreBoard(inputToScoreBoard.value, finalScore);
     winMessage.style.visibility = 'hidden';
 })
@@ -180,3 +181,6 @@ function updateScoreBoard(nameForScore, score){
     document.querySelector('table').appendChild(tr)
 }
 
+
+// TODO:
+// when winning message arrive from actual winning submit button doesn't work.

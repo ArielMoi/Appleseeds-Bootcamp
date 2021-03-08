@@ -78,7 +78,7 @@ button:hover {
   left: 39vw;
   background: orchid;
   padding: 50px;
-  visibility: hidden;
+  /* visibility: hidden; */
   width: 350px;
   display: flex;
   flex-direction: column;
