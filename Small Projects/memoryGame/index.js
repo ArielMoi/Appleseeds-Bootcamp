@@ -11,7 +11,7 @@ const difficultyForm = document.querySelector('form');
 
 const [difficultyEasy, difficultyMedium, difficultyHard] = document.querySelectorAll('button');
 
-const winMessage = document.querySelector('.game-container h1');
+const winMessage = document.querySelector('.winning-message');
 
 let matchesRevealed = 0;
 let countCardRevealing = 0;
@@ -64,8 +64,9 @@ function revealCard(event) {
 
 function checkIfUserWon() {
     if (matchesRevealed == amountOfCards / 2) { // compare the amount of matches revealed to the amount of cards
+        finalScore = timeOfGame;
         winMessage.style.visibility = 'visible';
-        winMessage.innerHTML = `YOU WON!!<br>it took you ${timeOfGame}s`
+        winMessage.innerHTML = `YOU WON!!<br>it took you ${finalScore}s`
         timeOfGame = 0;
     }
 }
@@ -105,7 +106,77 @@ difficultyButton.addEventListener('click', (event) => { // created the deck per 
 
 
 // game play 
+updateScoreBoardFromStorage(); // update score board
 setInterval(() => { // starts timer
     document.querySelector('p').innerText = `Time: ${timeOfGame}`
     timeOfGame++
 }, 1000);
+
+
+
+
+
+// ///// ----- SCORE Board
+
+const inputToScoreBoard = document.querySelector('card input');
+const submitButtonToScoreBoard = document.querySelector('card button');
+let finalScore = 0;
+
+submitButtonToScoreBoard.addEventListener('click', () => {  
+    updateScoreBoard(inputToScoreBoard.value, finalScore);
+    winMessage.style.visibility = 'hidden';
+})
+
+scoreBoardButton.addEventListener('click', () => {
+    document.querySelector('.score-board').style.visibility = 'visible';
+    const cards = document.querySelectorAll('.game-container div');
+    for (let card of cards) {
+        card.style.visibility = 'hidden'; // removes current cards if exist
+    }
+})
+
+document.querySelector('.score-board button').addEventListener('click', () => {
+    document.querySelector('.score-board').style.visibility = 'hidden';
+    const cards = document.querySelectorAll('.game-container div');
+    for (let card of cards) {
+        card.style.visibility = 'visible'; // removes current cards if exist
+    }
+})
+
+function updateScoreBoardFromStorage(){ // initialize scores from local storage (past games)
+    for (let score of Object.entries(localStorage)){
+        let tr = document.createElement('tr');
+        let name = document.createElement('td');
+        let space = document.createElement('td');
+        let scoreUser = document.createElement('td');
+
+        name.innerText = score[0];
+        space.innerText = '-';
+        scoreUser.innerText = score[1];
+
+        tr.appendChild(name);
+        tr.appendChild(space);
+        tr.appendChild(scoreUser);
+        document.querySelector('table').appendChild(tr)
+    }
+}
+
+// localStorage.clear()
+function updateScoreBoard(nameForScore, score){
+    localStorage.setItem(nameForScore, score); // update local storage
+
+    let tr = document.createElement('tr'); // creating the element in the score board
+    let name = document.createElement('td');
+    let space = document.createElement('td');
+    let scoreUser = document.createElement('td');
+
+    name.innerText = nameForScore;
+    space.innerText = '-';
+    scoreUser.innerText = score;
+
+    tr.appendChild(name);
+    tr.appendChild(space);
+    tr.appendChild(scoreUser);
+    document.querySelector('table').appendChild(tr)
+}
+
