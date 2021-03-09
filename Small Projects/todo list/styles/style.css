@@ -51,3 +51,11 @@ header {
   right: 5px;
   bottom: 1px;
 }
+
+.todo-list > div > div i {
+  margin: 2px;
+}
+
+.priority-light {
+  color: yellowgreen;
+}
