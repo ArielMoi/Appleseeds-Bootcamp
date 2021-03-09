@@ -12,12 +12,27 @@
 
 <body>
     <header>
+        <button>Delete All Notes</button>
+        <div>
+            <div>
+                <i class="fas fa-circle low-importance"></i>
+                <p>&nbsp;&nbsp;low importance</p>
+            </div>
+            <div>
+                <i class="fas fa-circle medium-importance"></i>
+                <p>&nbsp;&nbsp;medium importance</p>
+            </div>
+            <div>
+                <i class="fas fa-circle high-importance"></i>
+                <p>&nbsp;&nbsp;high importance</p>
+            </div>
+        </div>
         <h1>Your To Do List</h1>
     </header>
 
     <div class="input-todo">
         <label for="todo">//TODO:</label>
-        <textarea name="todo" id="" cols="30" rows="10"></textarea>
+        <textarea name="todo" id="" cols="30" rows="4"></textarea>
         <div>
             <label for="priority">priority:</label>
             <select name="priority">
@@ -29,18 +44,7 @@
         <button type="submit"><i class="far fa-check-square"></i></button>
     </div>
 
-    <div class="todo-list">
-        <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quidem explicabo ut adipisci eligendi illo
-                quod dolores qui eum a?</p>
-            <div>
-                <p class="priority"></p>
-                <input type="checkbox" name="isCompleted" id="">
-                <button><i class="far fa-trash-alt">trash</i></button>
-            </div>
-        </div>
-    </div>
-
+    <div class="todo-list"></div>
 
     <script src="index.js"></script>
 </body>

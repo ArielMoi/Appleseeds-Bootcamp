@@ -1,9 +1,5 @@
 const toDoListElement = document.querySelector('.todo-list');
 
-function trashIcon(id) {
-    return `<i data-id='${id}' class="far fa-trash-alt"></i>`
-}
-
 const ballIcon = '<i class="fas fa-circle"></i>';
 
 const submitNote = document.querySelector('.input-todo button');
@@ -11,24 +7,23 @@ const submitNote = document.querySelector('.input-todo button');
 const toDoObj = {};
 let id = 0;
 
+
+function trashIcon(id) {
+    return `<i data-id='${id}' class="far fa-trash-alt"></i>`
+} // function to add data-id and currend id to the icon (helps recognize the note and delete it)
+
 function createNote(text, priority = 0, isCompleted = false) {
-    let dateOfNote = new Date();
-    // toDoObj[++id] = [text, `${dateOfNote.getHours()}:${dateOfNote.getMinutes()},${dateOfNote.getDate()}/${dateOfNote.getMonth() + 1}/${dateOfNote.getFullYear()}`,
-    //     priority, isCompleted
-    // ];
+    let dateOfNote = new Date(); // collect info on current date
 
     localStorage.setItem(++id, [text, `${dateOfNote.getHours()}:${dateOfNote.getMinutes()},${dateOfNote.getDate()}/${dateOfNote.getMonth() + 1}/${dateOfNote.getFullYear()}`,
         priority, isCompleted
-    ])
+    ]) // set item in browser memory
 
-    // createNoteInHtml(id) // or in show my notes --- ! 
     updateNotes();
 }
 
 function createNoteInHtml(id, priorityOfNote, checked = false) { // publish note -- is called inside create element
-    /// creates al the html needed
-    // returns the element// will be used inside create note
-    // debugger;
+    /// creates the html needed
     let note = document.createElement('div');
     let text = document.createElement('p');
     let checkboxAndButtonDiv = document.createElement('div');
@@ -38,12 +33,9 @@ function createNoteInHtml(id, priorityOfNote, checked = false) { // publish note
 
     text.innerText = localStorage.getItem(id).split(',')[0];
 
-    // priority - green ball is 0, yellow is 1, red is 2;
-    // console.log(priorityOfNote);
     priorityShowcase.innerHTML = ballIcon;
-    switch (priorityOfNote){
+    switch (priorityOfNote){ // modify icon color by priority
         case '0':
-            // priorityShowcase.classList.add('priority-light')
             priorityShowcase.style.color = 'green';
             break;
         case '1':
@@ -58,7 +50,7 @@ function createNoteInHtml(id, priorityOfNote, checked = false) { // publish note
     checkbox.setAttribute("data-id", id);
     button.innerHTML = trashIcon(id);
 
-    if (checked) {
+    if (checked) { // make checked if user checked it
         checkbox.checked = true;
     }
 
@@ -71,25 +63,39 @@ function createNoteInHtml(id, priorityOfNote, checked = false) { // publish note
 
     note.setAttribute('data-id', id);
 
-    toDoListElement.appendChild(note);
+    toDoListElement.appendChild(note); // appent to html
 }
-
 
 function deleteNote(id) {
     localStorage.removeItem(id)
     updateNotes();
 }
 
-function updateNotes() { ///// nneed to arrange by priority and then completed
+function updateNotes() { ///// make shorter --->
     toDoListElement.innerHTML = '';
     for (let [id, note] of Object.entries(localStorage)) {
         let priority = note.split(',')[3];
-        // console.log(priority)
-        if (note.split(',')[4] == 'false') createNoteInHtml(id, priority)
+        if (note.split(',')[4] == 'false' && priority == 2) createNoteInHtml(id, priority)
     }
     for (let [id, note] of Object.entries(localStorage)) {
         let priority = note.split(',')[3];
-        if (note.split(',')[4] == 'true') createNoteInHtml(id, priority, true)
+        if (note.split(',')[4] == 'false' && priority == 1) createNoteInHtml(id, priority)
+    }
+    for (let [id, note] of Object.entries(localStorage)) {
+        let priority = note.split(',')[3];
+        if (note.split(',')[4] == 'false' && priority == 0) createNoteInHtml(id, priority)
+    }
+    for (let [id, note] of Object.entries(localStorage)) {
+        let priority = note.split(',')[3];
+        if (note.split(',')[4] == 'true' && priority == 2) createNoteInHtml(id, priority, true)
+    }
+    for (let [id, note] of Object.entries(localStorage)) {
+        let priority = note.split(',')[3];
+        if (note.split(',')[4] == 'true' && priority == 1) createNoteInHtml(id, priority, true)
+    }
+    for (let [id, note] of Object.entries(localStorage)) {
+        let priority = note.split(',')[3];
+        if (note.split(',')[4] == 'true' && priority == 0) createNoteInHtml(id, priority, true)
     }
 }
 
@@ -102,17 +108,10 @@ function markAsDone(id, doneOrNotDone) {
     updateNotes()
 }
 
-localStorage.clear();
-createNote('hi my name is');
-createNote('hi my holahoop is');
-// deleteNote(1)
-// console.log(toDoObj[1][0])
-updateNotes()
-
 
 toDoListElement.addEventListener('click', (e) => {
     let id = e.target.getAttribute('data-id');
-    if (e.target.type == 'checkbox') {
+    if (e.target.type == 'checkbox') { 
         markAsDone(id, e.target.checked)
     } else if (e.target.innerText = 'trash') {
         deleteNote(id)
@@ -123,14 +122,20 @@ toDoListElement.addEventListener('click', (e) => {
 submitNote.addEventListener('click', (e) => {
     const noteText = document.querySelector('.input-todo textArea');
     const priority = document.querySelector('select');
-    // console.log()
     let userPriority;
     for (let option of priority.options){
         if (option.selected){
-            userPriority = option.value
+            userPriority = option.value /// indication of note priority
         }
     }
-    // console.log(userPriority)
-    createNote(noteText.value, userPriority)
-    noteText.value = '';
+    createNote(noteText.value, userPriority) // create the note
+    noteText.value = ''; // reset the text area
 })
+
+document.querySelector('header button').addEventListener('click', () => { // deletes all notes
+    localStorage.clear();
+    updateNotes();
+})
+
+
+updateNotes();/// initializing notes

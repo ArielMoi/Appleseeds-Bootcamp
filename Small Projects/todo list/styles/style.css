@@ -16,6 +16,37 @@ header {
   margin: 20px;
 }
 
+header button {
+  border: 1px solid black;
+  padding: 7px;
+  border-radius: 20px;
+  float: left;
+}
+
+header button:hover {
+  border: 1px solid red;
+  color: red;
+}
+
+header > div {
+  float: right;
+}
+
+header > div > div {
+  display: flex;
+  margin: 7px;
+}
+
+.low-importance {
+  color: green;
+}
+.medium-importance {
+  color: yellow;
+}
+.high-importance {
+  color: red;
+}
+
 /* input note */
 .input-todo {
   display: flex;
