@@ -90,3 +90,44 @@ header > div > div {
 .priority-light {
   color: yellowgreen;
 }
+
+/* edit input */
+
+.edit-input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 300px;
+  margin-top: -150px;
+  margin-left: -200px;
+  text-align: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  z-index: 1;
+  border: 1px solid black;
+  visibility: hidden;
+}
+
+.edit-input button {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px;
+}
+
+.edit-input button:hover {
+  border: 1px solid red;
+  color: red;
+}
+
+.edit-input p {
+  cursor: pointer;
+}
+
+.edit-input p:hover {
+  color: red;
+}

@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!-- header -->
     <header>
         <button>Delete All Notes</button>
         <div>
@@ -30,6 +31,7 @@
         <h1>Your To Do List</h1>
     </header>
 
+    <!-- input section of note -->
     <div class="input-todo">
         <label for="todo">//TODO:</label>
         <textarea name="todo" id="" cols="30" rows="4"></textarea>
@@ -44,8 +46,16 @@
         <button type="submit"><i class="far fa-check-square"></i></button>
     </div>
 
+    <!-- actual to do list -->
     <div class="todo-list"></div>
 
+    <div class="edit-input">
+        <label for="edit">edit:</label>
+
+        <textarea name="edit" id="" cols="30" rows="10"></textarea>
+        <button type="submit">submit</button>
+        <p><i class="far fa-times-circle"></i></p>
+    </div>
     <script src="index.js"></script>
 </body>
 
