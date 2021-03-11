@@ -28,7 +28,6 @@ function returnToDoList(){
     let notDoneItems = Object.entries(toDoList).filter((el) => {
         return !el[1][1]
     })
-    console.log([...notDoneItems, ...doneItems])
     return [...notDoneItems, ...doneItems]
 }
 
