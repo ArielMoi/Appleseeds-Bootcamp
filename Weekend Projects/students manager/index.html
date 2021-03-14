@@ -19,17 +19,30 @@
     <div class="search-container">
         <label for="search">Search:</label>
         <input type="text">
-        <select name="search-type">
-            <option value="first name">first name</option>
-            <option value="second name">second name</option>
-            <option value="age">age</option>
-            <option value="capsule">capsule</option>
-        </select>
+        <div class="sort">
+            <label for="sort">Sort By:</label>
+            <select name="sort">
+                <option value="firstName">first name</option>
+                <option value="lastName">last name</option>
+                <option value="age">age</option>
+                <option value="capsule">capsule</option>
+                <option value="city">city</option>
+                <option value="hobby">hobby</option>
+            </select>
+        </div>
     </div>
 
+    <!-- loader -->
+    <div class="spinner-container">
+        <div class="spinner round1"></div>
+        <div class="spinner round2"></div>
+        <div class="spinner round3"></div>
+    </div>
 
     <!-- table, show case students -->
-    <div class="students-container">
+    <div>
+        <div class="students-container">
+        </div>
     </div>
 
     <script src="index.js"></script>

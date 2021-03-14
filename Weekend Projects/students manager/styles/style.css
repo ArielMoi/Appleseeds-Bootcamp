@@ -1,7 +1,166 @@
-td {
+body {
+  /* background-color: #314e52; */
+  background: url("Bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+}
+
+td,
+th {
   padding: 5px;
+}
+
+th {
+  background-color: #e7e6e1;
+  color: black;
+}
+
+td {
+  background-color: #f7f6e7;
+  color: black;
 }
 
 input {
   width: 60px;
+}
+
+.sort {
+  float: right;
+  margin-left: 5px;
+}
+
+.search-container {
+  width: 95vw;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  width: 70px;
+  margin: 2px;
+  background: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+button:hover {
+  color: #e7e6e1;
+  border: 1px solid #e7e6e1;
+}
+
+.students-container {
+  text-align: center;
+  margin: 20px;
+  margin-right: auto;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* loader */
+.spinner-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  background-color: grey;
+  border-radius: 50%;
+  margin: auto 10px;
+}
+
+.round1 {
+  animation-name: round1;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.round2 {
+  animation-name: round2;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.round3 {
+  animation-name: round3;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes round1 {
+  20% {
+    transform: translateY(-20px);
+    background-color: yellowgreen;
+  }
+
+  40% {
+    transform: translateY(0);
+    background-color: grey;
+  }
+}
+
+@keyframes round2 {
+  30% {
+    transform: translateY(0);
+    background-color: grey;
+  }
+
+  50% {
+    transform: translateY(-20px);
+    background-color: rgb(85, 87, 11);
+  }
+
+  70% {
+    transform: translateY(0);
+    background-color: grey;
+  }
+}
+
+@keyframes round3 {
+  60% {
+    transform: translateY(0);
+    background-color: grey;
+  }
+
+  80% {
+    transform: translateY(-20px);
+    background-color: orangered;
+  }
+
+  100% {
+    transform: translateY(0);
+    background-color: grey;
+  }
+}
+
+/* weather window */
+
+.weather-window {
+  position: fixed;
+  top: 27px;
+  width: 210px;
+  height: max-content;
+  background: black;
+  border-radius: 10px;
+  color: #fff;
+  z-index: 1;
+  padding: 2px;
+  left: 5px;
 }

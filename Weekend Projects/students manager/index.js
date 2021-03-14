@@ -1,144 +1,233 @@
-/*
-
-- creating divs in a table shape
-
-DATA
-- fetching the data
-- rendering it
-- adding it to local storage
-- creates a function to translate the local storage data to obj.
-
-** all changes will be done in the obj. can update local storage for add features
-** adding data-row - key number in obj.
-
-* each change made in table will translate to updating the obj and the func to update table from obj
-
-FUNCTIONS
-- functions to update table from obj
-- function to delete row (deletes key in obj)
-- function to update row (recognizing from input if changed and then replace the data)
-
-
-EVENT LISTENER
-- on all grid,
-recognizing current obj bt data=row and using it in obj to get details
-*/
-
-
-/// fetching data from api and rendreing it to an object
-
+// variables for continue use.
 const studentsContainer = document.querySelector('.students-container');
-// console.log(studentsContainer);
-
 
 const myApi = 'https://apple-seeds.herokuapp.com/api/users/';
 
 let studentsData = {};
+const headerTR =
+    `<th data-type="firstName">firstName</th>
+<th data-type="lastName">lastName</th>
+<th data-type="capsule">capsule</th>
+<th data-type="gender">gender</th>
+<th data-type="age">age</th>
+<th data-type="city">city</th>
+<th data-type="hobby">hobby</th>`;
 
-async function collectingStudentsData() {
-    // adding loader animation - -  - - - - -
-    response = await fetch(myApi);
+let editedStudent; // is updated. for edit mode.
+
+
+//! FUNCTIONS 
+
+async function collectingStudentsData() { // func to collect data from API
+    let response = await fetch(myApi);
     response = await response.json();
 
-    for (let student of response) {
-        let responsePerUser = await fetch(`${myApi}${response[student.id].id}`);
-        responsePerUser = await responsePerUser.json();
+    await Promise.all(
+        response.map(async (el, i) => {
+            let responsePerUser = await fetch(`${myApi}${i}`);
 
-        response[student.id].age = responsePerUser.age;
-        response[student.id].city = responsePerUser.city;
-        response[student.id].gender = responsePerUser.gender;
-        response[student.id].hobby = responsePerUser.hobby;
-        // response[student.id].firstName = responsePerUser.hobby;
-        // response[student.id].hobby = responsePerUser.hobby;
+            responsePerUser = await responsePerUser.json();
 
-        studentsData[student.id] = response[student.id];
-    }
+            response[el.id].age = responsePerUser.age;
+            response[el.id].city = responsePerUser.city;
+            response[el.id].gender = responsePerUser.gender;
+            response[el.id].hobby = responsePerUser.hobby;
+            response[el.id].editButton = 'Edit';
+            response[el.id].deleteButton = 'Delete';
+
+            studentsData[el.id] = response[el.id];
+        }))
+
+    localStorage.setItem('studentsData', JSON.stringify(studentsData));
+    document.querySelector('.spinner-container').style.display = 'none'; // hide loader when data finshed loading
 }
 
-collectingStudentsData().then(() => {
-    console.log(studentsData)
-    displayingData();
-    // deleteRow(0);
-    editRow(0);
-})
-
-
-function displayingData(){
+function displayingData(students = studentsData) { // create th and td and adding them to table in html
     studentsContainer.innerHTML = '';
 
     let tr = document.createElement('tr');
-
-    tr.innerHTML = 
-    `<td data-type="firstName">firstName</td>
-    <td data-type="lastName">lastName</td>
-    <td data-type="capsule">capsule</td>
-    <td data-type="gender">gender</td>
-    <td data-type="age">age</td>
-    <td data-type="city">city</td>
-    <td data-type="hobby">hobby</td>`
-
+    tr.innerHTML = headerTR;
     studentsContainer.appendChild(tr);
 
-    for (let student in studentsData){
+    for (let student in students) {
         let tr = document.createElement('tr');
 
-        tr.innerHTML = 
-        `<td data-row="${student}" data-type="firstName">${studentsData[student].firstName}</td>
-        <td data-row="${student}" data-type="lastName">${studentsData[student].lastName}</td>
-        <td data-row="${student}" data-type="capsule">${studentsData[student].capsule}</td>
-        <td data-row="${student}" data-type="gender">${studentsData[student].gender}</td>
-        <td data-row="${student}" data-type="age">${studentsData[student].age}</td>
-        <td data-row="${student}" data-type="city">${studentsData[student].city}</td>
-        <td data-row="${student}" data-type="hobby">${studentsData[student].hobby}</td>
-        <button data-row="${student}" class='edit-button'>Edit</button>
-        <button data-row="${student}" class='delete-button'>Delete</button>
+        tr.innerHTML =
+            `<td data-row="${student}" data-type="firstName">${students[student].firstName}</td>
+        <td data-row="${student}" data-type="lastName">${students[student].lastName}</td>
+        <td data-row="${student}" data-type="capsule">${students[student].capsule}</td>
+        <td data-row="${student}" data-type="gender">${students[student].gender}</td>
+        <td data-row="${student}" data-type="age">${students[student].age}</td>
+        <td data-row="${student}" data-type="city">${students[student].city}</td>
+        <td data-row="${student}" data-type="hobby">${students[student].hobby}</td>
+        <button data-row="${student}" class='edit-button'>${students[student].editButton}</button>
+        <button data-row="${student}" class='delete-button'>${students[student].deleteButton}</button>
         `
 
         studentsContainer.appendChild(tr);
     }
 }
 
-
-function deleteRow(rowNum){
+function deleteRow(rowNum) {
     delete studentsData[rowNum];
     displayingData();
+    updateLocalStorage();
 }
 
-// on event click on edit button
-function editRow(rowNum){
-    debugger;
-    
-    let studentData = studentsData[rowNum];
-    
-    studentsData[rowNum] = {id: studentData.id , firstName: `<input type="text" value="${studentData.firstName}">`,
-    lastName: `<input type="text" value="${studentData.lastName}">`, capsule: `<input type="text" value="${studentData.capsule}">`,
-    age: `<input type="text" value="${studentData.age}">`, city: `<input type="text" value="${studentData.city}">`,
-    gender: `<input type="text" value="${studentData.gender}">`, hobby: `<input type="text" value="${studentData.hobby}">`}
-    
-    let buttons = document.querySelectorAll('button')
+let isEdited = false;
 
-    
-    
-    
-    let editButtonOrDelCount = 0;
-    for (let btn of buttons){ // pulling the right buttons to change.
-        if (btn.getAttribute('data-row') == rowNum){
-            switch (editButtonOrDelCount){
-                case 0:
-                    btn.innerText = 'Cancel';
-                    btn.style.backgroundColor = 'yellow';
-                    editButtonOrDelCount++;
-                    break;
-                case 1:
-                    btn.innerText = 'Confirm';
-                    btn.style.backgroundColor = 'red';
-                    break;
+function editRow(rowNum) {
+    isEdited = true;
+
+    let studentData = studentsData[rowNum];
+
+    studentsData[rowNum] = {
+        id: studentData.id,
+        firstName: `<input type="text" data-type="firstName" value="${studentData.firstName}">`,
+        lastName: `<input type="text" data-type="lastName" value="${studentData.lastName}">`,
+        capsule: `<input type="text" data-type="capsule" value="${studentData.capsule}">`,
+        age: `<input type="text" data-type="age" value="${studentData.age}">`,
+        city: `<input type="text" data-type="city" value="${studentData.city}">`,
+        gender: `<input type="text" data-type="gender" value="${studentData.gender}">`,
+        hobby: `<input type="text" data-type="hobby" value="${studentData.hobby}">`,
+        editButton: 'Confirm',
+        deleteButton: 'Cancel'
+    } //  replace text to input.
+
+    displayingData(); /// * updating
+    return studentData; //* to save original student data.
+
+}
+
+function applyEditOnRow(rowNum, studentData, confirm = true) {
+    if (confirm) {
+        let inputs = document.querySelectorAll('input')
+        let firstInput = true; // ignores search input (the first input)
+        for (let input of inputs) {
+            if (!firstInput) {
+                if (input.value != input.getAttribute('value')) {
+                    let type = input.getAttribute('data-type');
+                    studentData[type] = input.value;
+                }
+            } else firstInput = false;
+        }
+    }
+    isEdited = false;
+    studentsData[rowNum] = studentData;
+    displayingData();
+    updateLocalStorage();
+}
+
+function searching(value) {
+    displayingData(); // false
+    let allRows = document.querySelectorAll('tr');
+    studentsContainer.innerHTML = ''; // headerTH
+
+    let isHeader = true; // * so to skip the header of the table
+    for (let i in allRows) {
+        if (isHeader) {
+            studentsContainer.appendChild(allRows[i]);
+            isHeader = false;
+        } else {
+            if (allRows[i].textContent.toLowerCase().includes(value.toLowerCase())) {
+                studentsContainer.appendChild(allRows[i])
             }
         }
     }
+} // TODO: fix ERROR (doesn't break - throws error in console because all allRows becomes shorter)
 
-displayingData(); /// updating
-    
+
+function sortBy(typeToSort) {
+    let studentsArray = [];
+
+    for (let student of Object.values(studentsData)) {
+        studentsArray.push([student[typeToSort], student.id]);
+    }
+
+    studentsArray.sort(); // * create array to sort him by the type to sort
+
+    let sortedObj = {};
+    let count = 0;
+    for (student of studentsArray) {
+        sortedObj[count++] = studentsData[student[1]] // creating new students obj by order of the sort
+    }
+
+    displayingData(sortedObj);
+}
+
+// * weather window
+async function fetchWeather(city, htmlElement) {
+    let weatherData = await fetch(
+        `https://api.codetabs.com/v1/proxy?quest=api.openweathermap.org/data/2.5/weather?q=${city.split(' ').join('-')}&units=metric&appid=555866706cc6ebcb5c906b94a54a6c36`)
+    weatherData = await weatherData.json();
+
+    createsWindowInHtml(htmlElement, weatherData.main.temp, city)
+}
+
+function createsWindowInHtml(htmlElement, temp, city) {
+    let div = document.createElement('div');
+
+    div.classList.add('weather-window')
+    div.innerHTML = `${city} temp: ${temp}&#x2103;`
+
+    htmlElement.appendChild(div);
 }
 
 
+//! EVENT LISTENERS
+
+studentsContainer.addEventListener('click', (e) => {
+    let row = e.target.getAttribute('data-row');
+    if (e.target.innerText == 'Confirm') {
+        applyEditOnRow(row, editedStudent);
+    }
+    if (e.target.innerText == 'Edit') {
+        if (!isEdited) {
+            editedStudent = editRow(row);
+        }
+    }
+    if (e.target.innerText == 'Delete') {
+        deleteRow(row);
+    }
+    if (e.target.innerText == 'Cancel') {
+        applyEditOnRow(row, editedStudent, false);
+    }
+})
+
+function updateLocalStorage() { // keep the local storage updated
+    localStorage.removeItem('studentsData');
+    localStorage.setItem('studentsData', JSON.stringify(studentsData));
+}
+
+// search input
+document.querySelector('input').addEventListener('input', (event) => {
+    searching(event.target.value) // search on each input on search input
+});
+
+//sortBy input (select)
+document.querySelector('select').addEventListener('input', (event) => {
+    sortBy(event.target.value);
+});
+
+studentsContainer.addEventListener('mouseover', (event) => { // weather info getter
+    if (event.target.getAttribute('data-type') == 'city') {
+        event.target.innerText != 'city' && fetchWeather(event.target.innerText, event.target) // fetch weather data from api and show it in DOM     
+    }
+})
+studentsContainer.addEventListener('mouseout', (event) => { // weather info remover
+    if (event.target.getAttribute('data-type') == 'city') {
+        document.querySelector('.weather-window') && document.querySelector('.weather-window').remove(); // remove weather info on mouse out
+    }
+})
+
+
+// * program:
+if (localStorage.getItem('studentsData')) { /// if data eas already loaded
+    studentsData = JSON.parse(localStorage.getItem('studentsData'));
+    document.querySelector('.spinner-container').style.display = 'none'; // hide loader when data finished loading
+    displayingData();
+} else { // if data wasn't loaded yet
+    collectingStudentsData().then(() => {
+        displayingData();
+    });
+}

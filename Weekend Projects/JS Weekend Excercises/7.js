@@ -33,3 +33,5 @@ function map(arr, callback){
 }
 
 //console.log(map([1,2,3,4], el => el * 2))
+
+module.exports = [filter, forEach, map];
