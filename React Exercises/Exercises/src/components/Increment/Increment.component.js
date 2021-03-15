@@ -8,7 +8,7 @@ class Increment extends React.Component {
     this.Increment = this.increment.bind(this);
   }
 
-  increment(event) {
+  increment() {
     this.setState({ amount : (this.state.amount + 1)});
   }
 
