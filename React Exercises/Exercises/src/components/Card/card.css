@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  border: 1px solid black;
+  width: max-content;
+  box-shadow: 0 0 5px black;
+  margin: 5px;
+}
+
+a {
+  color: orange;
+  margin: 5px;
+}
