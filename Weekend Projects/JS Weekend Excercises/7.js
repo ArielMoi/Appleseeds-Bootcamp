@@ -8,9 +8,11 @@
 
 
 function filter(arr, callback) {
+    let arr1 =[];
     for (let el of arr){
-       if (callback(el)) return el
+       if (callback(el)) arr1.push(el);
     }
+    return arr1;
 }
 
 // console.log(filter([1,5,3, 4, 2], (el) => el % 2 == 0))

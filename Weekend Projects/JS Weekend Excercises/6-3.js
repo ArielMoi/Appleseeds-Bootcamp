@@ -23,4 +23,6 @@ function longest(s1,s2){
     return array.sort().join('');
 }
 
-console.log(longest('xyaabbbccccdefww', 'xxxxyyyyabklmopq'));
+// console.log(longest('xyaabbbccccdefww', 'xxxxyyyyabklmopq'));
+
+module.exports = longest;

@@ -15,6 +15,8 @@ function isogram(str){
 }
 
 
-console.log(isogram('Dermatoglyphics'))
-console.log(isogram('aba'))
-console.log(isogram('mMOse'))
+// console.log(isogram('Dermatoglyphics'))
+// console.log(isogram('aba'))
+// console.log(isogram('mMOse'))
+
+module.exports = isogram;
