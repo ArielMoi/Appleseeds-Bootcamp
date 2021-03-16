@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+}
+
+div {
+  margin: 5px;
+  width: 200px;
+  height: 200px;
+}
