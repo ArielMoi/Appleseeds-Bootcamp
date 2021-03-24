@@ -23,6 +23,7 @@ class App extends React.Component {
     const posts = this.state.data.map((post) => {
       return (
         <Post
+          key={post.id}
           userName={post.name}
           imgSrc={post.image}
           imgAlt="doggie"
@@ -31,6 +32,16 @@ class App extends React.Component {
       );
     });
     this.setState({ posts });
+
+    axios.delete("https://605b251627f0050017c0645f.mockapi.io/dogs/11");
+  }
+
+  post = (name, image, post) => {
+    axios.post("https://605b251627f0050017c0645f.mockapi.io/dogs/", {
+      name,
+      image,
+      post,
+    });    
   }
 
   render() {
