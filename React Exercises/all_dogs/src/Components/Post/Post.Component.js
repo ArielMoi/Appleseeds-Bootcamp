@@ -11,8 +11,16 @@ function Post(props) {
           <p>{props.postMessage}</p>
         </div>
         <div className="buttons">
-          <Button i="fas fa-trash" buttonText="Delete" />
-          <Button i="fas fa-edit" buttonText="Edit" />
+          <Button
+            i="fas fa-trash"
+            buttonText="Delete"
+            onClickFunc={props.clickDelete}
+          />
+          <Button
+            i="fas fa-edit"
+            buttonText="Edit"
+            onClickFunc={props.clickEdit}
+          />
         </div>
       </div>
     </div>

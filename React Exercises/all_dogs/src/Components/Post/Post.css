@@ -7,11 +7,11 @@
   width: 80vw;
   height: max-content;
   display: grid;
-  grid-template-columns: 3fr 3fr 1fr;
+  grid-template-columns: 3fr 5fr 1fr;
 }
 
 .post {
-  max-height: 18vh;
+  max-height: 22vh;
 }
 
 .post h6 {
@@ -22,8 +22,9 @@
 }
 
 .post img {
-  max-height: 13vh;
-  width: 20vw;
+  width: fit-content;
+  max-height: 20vh;
+  max-width: 40vw;
   border-radius: 10px;
   margin: 4px;
 }

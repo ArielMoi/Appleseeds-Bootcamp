@@ -11,12 +11,12 @@
 }
 
 .btn:hover,
-.btn:active,
 .btn:focus {
   color: var(--secondary-color);
   cursor: pointer;
   border: 1px solid var(--secondary-color);
   border-radius: 30px;
+  outline: none;
 }
 
 .btn-icon {
