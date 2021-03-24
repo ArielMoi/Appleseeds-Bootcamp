@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import "./index.css";
-import data from './all exercises/store';
+import data from './store';
 
 function Header(){
   console.log(data);

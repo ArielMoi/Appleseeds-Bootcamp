@@ -1,0 +1,6 @@
+.navigator {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  margin: 0;
+  display: flex;
+}

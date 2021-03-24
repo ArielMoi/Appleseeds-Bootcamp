@@ -1,0 +1,12 @@
+#nav-btn {
+  position: fixed;
+  top: 0;
+  right: 5px;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+#nav-btn:hover {
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+}

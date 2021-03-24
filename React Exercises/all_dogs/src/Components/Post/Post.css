@@ -1,0 +1,38 @@
+.post {
+  border: 1px solid var(--dark-color);
+  margin: 10px auto;
+  padding: 2px 25px;
+  padding-right: 0;
+  border-radius: 20px;
+  width: 80vw;
+  height: max-content;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+}
+
+.post {
+  max-height: 18vh;
+}
+
+.post h6 {
+  position: absolute;
+  float: right;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+}
+
+.post img {
+  max-height: 13vh;
+  width: 20vw;
+  border-radius: 10px;
+  margin: 4px;
+}
+
+.post-mes {
+  margin: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
