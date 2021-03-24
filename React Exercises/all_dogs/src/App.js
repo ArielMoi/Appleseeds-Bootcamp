@@ -33,7 +33,7 @@ class App extends React.Component {
     });
     this.setState({ posts });
 
-    axios.delete("https://605b251627f0050017c0645f.mockapi.io/dogs/11");
+    
   }
 
   post = (name, image, post) => {
@@ -43,6 +43,11 @@ class App extends React.Component {
       post,
     });    
   }
+
+  delete = (id) => {
+    axios.delete(`https://605b251627f0050017c0645f.mockapi.io/dogs/${id}`);
+  }
+
 
   render() {
     return (
