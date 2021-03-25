@@ -4,8 +4,8 @@ import Post from "./Components/Post/Post.Component";
 import Nav from "./Components/Nav/Nav.Component";
 import Button from "./Components/Button/Button.Component";
 import axios from "axios";
-import { render } from "@testing-library/react";
 
+let api = "https://605b251627f0050017c0645f.mockapi.io/dogs/";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,13 +14,15 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const { data } = await axios.get(
-      "https://605b251627f0050017c0645f.mockapi.io/dogs/"
-    );
+    let { data } = await axios.get(api);
 
-    await this.setState({ data });
+    await this.setState({ data }); 
 
-    const posts = this.state.data.map((post) => {
+    this.updatePostsFromData();
+  }
+
+  updatePostsFromData = () => {
+      const posts = this.state.data.map((post) => {
       return (
         <Post
           key={post.id}
@@ -34,55 +36,44 @@ class App extends React.Component {
       );
     });
     this.setState({ posts });
-
-    this.edit(
-      9,
-      "arielll",
-      "http://lorempixel.com/640/480/transport",
-      "papapapapapaap"
-    );
   }
 
-  updateAndRender = async () => {
-    let { data } = await axios.get(
-      "https://605b251627f0050017c0645f.mockapi.io/dogs/"
-    );
-
-    await this.setState({ data });
-  };
-
-  post = (name, image, post) => {
-    axios.post("https://605b251627f0050017c0645f.mockapi.io/dogs/", {
+  post = async (name, image, post) => { // add func to button and make a create screen
+    let {data} = await axios.post(api, {
       name,
       image,
       post,
     });
+
+    await this.setState({data: [...this.state.data, data]})
+    this.updatePostsFromData();
   };
 
-  delete = (id) => {
-    axios.delete(`https://605b251627f0050017c0645f.mockapi.io/dogs/${id}`);
-    this.updateAndRender();
+  delete = async (id) => {
+    await axios.delete(
+      `${api}${id}`
+    );
+    
+    const data = this.state.data.filter(el => el.id !== id)
+    await this.setState({ data });
+
+    this.updatePostsFromData();
   };
 
-  edit = (id, name, image, post) => { // ! DONT WORK
-    // fetch(`https://605b251627f0050017c0645f.mockapi.io/dogs/${id}`, {
-    //   method: "PATCH",
-    //   body: JSON.stringify({ name, image, post }),
-    // })
-    //   .then((response) => {
-    //     console.log(response.status);
-    //     return response.json(name, image, post);
-    //   })
-    //   .then((data) => console.log(data));
-    axios
-      .patch(`https://605b251627f0050017c0645f.mockapi.io/dogs/${id}`, {
-        name,
-        image,
-        post,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+  edit = async (id, name, image, post) => {
+    this.delete(id);
+    await axios.put(`${api}${id}`, { // ! doesnt update but create new obj
+      name: "ariel",
+      image,
+      post,
+    });
+
+    
+    console.log(this.state.data);
+    await this.setState({data: [...this.state.data, {id, post, name, image}]})
+    console.log(this.state.data);
+
+    this.updatePostsFromData();
   };
 
   render() {
@@ -93,6 +84,7 @@ class App extends React.Component {
           i="fas fa-plus-square"
           buttonText="New Post"
           buttonId="nav-btn"
+          onClickFunc={() => this.post('ariel', 'dfl', 'arielllllll')}
         />
         {this.state.posts}
       </div>
