@@ -67,11 +67,13 @@ class App extends React.Component {
       post,
     });
 
-    console.log(this.state.data); /// here the problem 
-    await this.setState({data: [...this.state.data, {id, post, name, image}]}) // ** need to update in the right way and splice and add updated data
-    console.log(this.state.data);
 
-    this.updatePostsFromData(); // this stay.
+    // TODO: replace the data in this.state
+    console.log(this.state.data); 
+    await this.setState({data: [...this.state.data, {id, post, name, image}]}) 
+    console.log(this.state.data); // **
+
+    this.updatePostsFromData(); 
   }; 
 
   render() {
