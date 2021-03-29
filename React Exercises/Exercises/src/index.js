@@ -2,44 +2,31 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-function ReadMoreText(props){
-  const [isReadMore, readMore] = React.useState(false)
+const dataToDo = [
+{ name: "CSS", completed: true },
+{ name: "JavaScript", completed: true },
+{ name: "Learn React", completed: false },
+{ name: "Learn mongoDB", completed: false },
+{ name: "Learn Node JS", completed: false },
+]
 
-  const updateIsReadMore = (toReadMore) => {
-    readMore(toReadMore)
-  }
+function SimpleToDo(data) {
+  console.log(data);
+  const [datato, setData] = data.map(todo => {
+      return(
+        <div>
+        <h1>{todo.name}</h1>
+        <p>{todo.completed ? 'complete' : 'no complete'}</p>
+        </div>
+      )
+    })
 
-  if (!isReadMore) {
-    return (
-      <div>
-        <p>
-          {props.text.slice(0, props.maxLength)}{" "}
-          <span
-            style={{ color: "blue", cursor: "pointer" }}
-            onClick={() => updateIsReadMore(true)}
-          >
-            Read More
-          </span>
-        </p>
-        ghj
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <p>
-          {props.text}
-          <span
-            style={{ color: "blue", cursor: "pointer" }}
-            onClick={() => updateIsReadMore(false)}
-          >
-            Read less
-          </span>
-        </p>
-        ghj
-      </div>
-    );
-  }
+  return (<div>
+    {datato}
+  </div>)
 }
 
-ReactDOM.render(<ReadMoreText text='lsd jkdj jk' maxLength='5' />, document.getElementById("root"));
+ReactDOM.render(
+  <SimpleToDo data={dataToDo} />,
+  document.getElementById("root")
+);

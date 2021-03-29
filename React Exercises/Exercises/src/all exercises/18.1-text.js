@@ -21,7 +21,6 @@ function ReadMoreText(props){
             Read More
           </span>
         </p>
-        ghj
       </div>
     );
   } else {
@@ -36,7 +35,6 @@ function ReadMoreText(props){
             Read less
           </span>
         </p>
-        ghj
       </div>
     );
   }
