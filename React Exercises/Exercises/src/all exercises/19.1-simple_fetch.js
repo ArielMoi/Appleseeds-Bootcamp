@@ -3,8 +3,6 @@ import axios from 'axios'
 import ReactDOM from "react-dom";
 import "./index.css";
 
-const list = ["one", "two", "three", "four", "five"];
-
 function UseApi(){
 
   const [data, setData] = useState([])
