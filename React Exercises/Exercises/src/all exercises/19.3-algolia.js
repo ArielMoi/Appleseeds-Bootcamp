@@ -3,38 +3,37 @@ import axios from "axios";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-function Search(props){
-
-  const [searchInput, setSearch] = useState('');
+function Search(props) {
+  const [searchInput, setSearch] = useState("");
 
   return (
     <div>
-      <input type='text' onChange={(event) => setSearch(event.target.value)}/>
+      <input type="text" onChange={(event) => setSearch(event.target.value)} />
       <button onClick={() => props.searchFunc(searchInput)}>Search</button>
     </div>
-  )
+  );
 }
 
-function AlgoliaSearch(){
-
-  const [searchInput, setSearchInput] = useState('hooks');
-  const [apiData, setApiData] = useState([])
+function AlgoliaSearch() {
+  const [searchInput, setSearchInput] = useState("hooks");
+  const [apiData, setApiData] = useState([]);
 
   useEffect(async () => {
+    setApiData([{ title: "loading", link: "" }]);
     const { data } = await axios.get(
       `https://hn.algolia.com/api/v1/search?query={${searchInput}}`
     );
-    console.log(data);
+    // console.log(data);
     setApiData(data.hits);
   }, [searchInput]);
 
   const search = (value) => {
     setSearchInput(value);
-  }
+  };
 
   return (
     <div>
-      <Search searchFunc ={search}/>
+      <Search searchFunc={search} />
       {apiData.map((d) => {
         return (
           <div>
