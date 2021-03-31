@@ -1,102 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-const dataForCarousel = [
-  {
-    header: "doggie",
-    subHeader: "this is Dog",
-    imgUrl:
-      "https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=620&quality=85&auto=format&fit=max&s=56d5de4c5609ca98def0c3382bd569b4",
-  },
-  {
-    header: "cat",
-    subHeader: "hi im cat",
-    imgUrl:
-      "https://static.toiimg.com/thumb/msid-67586673,width-800,height-600,resizemode-75,imgsize-3918697,pt-32,y_pad-40/67586673.jpg",
-  },
-  {
-    header: "seal",
-    subHeader: "hi im seal",
-    imgUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/c/c0/Seal_2012_%28cropped%29.jpg",
-  },
-];
+function ToBlackAndWhite(){
+  const firstImage = useRef(null)
+  const secondImage = useRef(null)
 
-let current = 0;
-function Carousel() {
-  
-  const [currentObj, setCurrentObj] = useState(dataForCarousel[current]);
+  const firstImageFunc = (blackAndWhite=true) => {
+    if (blackAndWhite){
+      firstImage.current.style.filter = "grayscale(100%)";
+    }else{
+      firstImage.current.style.filter = "grayscale(0%)";
+    }
+  }
 
-  const carousleStyle = {
-    margin: "10%",
-    marginTop: "5px",
-    padding: "15px",
-    position: "relative",
-    width: '500px',
-  };
-
-  const imgStyle = {
-    position: "absolute",
-    width: "100%",
-    zIndex: -1,
-  };
-
-  const headerStyle = {
-    position: "absolute",
-    top: "10px",
-  };
-
-  const subHeaderStyle = {
-    position: "absolute",
-    top: "40px",
-    color: "red",
-  };
-
-  const arrowLeftStyle = {
-    position: "absolute",
-    top: "200px",
-    left: "20px",
-    color: "red",
-    cursor: "pointer",
-  };
-
-  const arrowRightStyle = {
-    position: "absolute",
-    top: "200px",
-    right: "20px",
-    color: "red",
-    cursor: "pointer",
-  };
-
-  const onClickRight = () => {
-    current = current == 2 ? 0 : current + 1;
-    setCurrentObj(dataForCarousel[current]);
-  };
-
-  const onClickLeft = () => {
-    current = current == 0 ? 2 : current - 1;
-    setCurrentObj(dataForCarousel[current]);
-  };
+  const secondImageFunc = (blackAndWhite=true) => {
+    if (blackAndWhite){
+      secondImage.current.style.filter = "grayscale(100%)";
+    }else{
+      secondImage.current.style.filter = "grayscale(0%)";
+    }
+  }
 
   return (
-    <div style={{ ...carousleStyle }}>
-      <img src={currentObj.imgUrl} style={{ ...imgStyle }} />
-      <h2 style={{ ...headerStyle }}>{currentObj.header}</h2>
-      <h6 style={{ ...subHeaderStyle }}>{currentObj.subHeader}</h6>
-      <i
-        class="fas fa-arrow-left"
-        style={{ ...arrowLeftStyle }}
-        onClick={onClickLeft}
-      ></i>
-      <i
-        class="fas fa-arrow-right"
-        style={{ ...arrowRightStyle }}
-        onClick={onClickRight}
-      ></i>
+    <div>
+      <img
+        src="https://i.guim.co.uk/img/media/684c9d087dab923db1ce4057903f03293b07deac/205_132_1915_1150/master/1915.jpg?width=1020&quality=85&auto=format&fit=max&s=a051cbae7af4a687e5dde62d66a4b292"
+        ref={firstImage}
+        onMouseEnter={firstImageFunc}
+        onMouseLeave={() => firstImageFunc(false)}
+      />
+      <img
+        src="https://i.guim.co.uk/img/media/684c9d087dab923db1ce4057903f03293b07deac/205_132_1915_1150/master/1915.jpg?width=1020&quality=85&auto=format&fit=max&s=a051cbae7af4a687e5dde62d66a4b292"
+        ref={secondImage}
+        onMouseEnter={secondImageFunc}
+        onMouseLeave={() => secondImageFunc(false)}
+      />
     </div>
   );
 }
 
-ReactDOM.render(<Carousel />, document.getElementById("root"));
+ReactDOM.render(<ToBlackAndWhite />, document.getElementById("root"));
