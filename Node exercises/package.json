@@ -1,0 +1,15 @@
+{
+  "name": "node-exercises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "2.1-file_system.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "validator": "^13.5.2"
+  }
+}
