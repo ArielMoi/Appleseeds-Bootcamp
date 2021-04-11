@@ -14,9 +14,10 @@ when using the import syntax :
 - process
 - global 
 
-
 */
 
-import {fs} from 'fs';
+import fs from 'fs';
+import {add} from './practice.mjs'
 
-console.log(fs.readdirSync(__dirname));
+console.log(fs.readdirSync('./'));
+console.log(add());
