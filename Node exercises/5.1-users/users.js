@@ -33,6 +33,7 @@ const saveUsers = (users) => {
 }
 
 const removeUser = (user) => {
+    debugger;
     const users = loadUsers();
     const usersWithoutRemoved = users.filter(u => u.name !== user);
     saveUsers(usersWithoutRemoved);
