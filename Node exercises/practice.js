@@ -1,35 +1,12 @@
-const { demandOption } = require('yargs');
-const yargs = require('yargs');
+const express = require("express");
+const app = express();
+const port = 3000;
 
-// console.log(process.argv);
-
-// cosumize yargs
-yargs.version('1.2')
-
-// creates add commend
-yargs.command({
-    command: 'add',
-    describe: 'description',
-    builder:{
-        title: {
-            describe:'blabla',
-            demandOption: true, /// forcing to use
-            type: 'string', // forcing a type
-        }
-    },
-    handler: (argv) => {
-        console.log('Title: ', argv.title);
-    }
-})
-
-// create remove command
-yargs.command({
-  command: "remove",
-  describe: "description",
-  handler: () => {
-    console.log('this is a-');
-  },
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+  console.log(res);
 });
 
-// console.log(yargs.argv);
-yargs.parse() // parsing all and loging it.
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});

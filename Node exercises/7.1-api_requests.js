@@ -1,5 +1,5 @@
 const axios = require('axios');
-const request = require('request')
+const request = require('request');
 const got = require("got");
 
 const collectRandomJoke = async() => {
