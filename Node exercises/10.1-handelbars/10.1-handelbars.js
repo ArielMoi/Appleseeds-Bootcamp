@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const fs = require('fs')
-// const index = fs.readFileSync("./public/index.html");
+const index = fs.readFileSync("./public/index.html");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     title: 'Index'
   });
+  //res.send(`${index}`) /// --> static files
 });
 
 app.get("/about", (req, res) => {
