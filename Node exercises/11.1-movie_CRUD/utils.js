@@ -42,10 +42,15 @@ const updateMovie = (titleToUpdate, updateObj) => {
   return updatedMovies;
 };
 
+const filteredMovies = () => {
+  return moviesJson.sort((a, b) => a.rating - b.rating);
+};
+
 module.exports = {
   deleteInApi,
   addToApi,
   findMovie,
   getAllMovies,
   updateMovie,
+  filteredMovies,
 };

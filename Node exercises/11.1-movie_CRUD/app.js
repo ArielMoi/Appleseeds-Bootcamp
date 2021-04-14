@@ -7,14 +7,20 @@ const {
   findMovie,
   getAllMovies,
   updateMovie,
+  filteredMovies,
 } = require("./utils.js");
 
 app.use(express.json());
 
 app.get("/api/movies", (req, res) => {
   try {
-    const movies = getAllMovies();
-    res.status(200).send(movies);
+    if (req.query.sorted) {
+      const movies = filteredMovies();
+      res.status(200).send(movies);
+    } else {
+      const movies = getAllMovies();
+      res.status(200).send(movies);
+    }
   } catch (e) {
     res.status(400).send({ error: e.message });
   }
@@ -31,21 +37,21 @@ app.get("/api/movies/:movie", (req, res) => {
 });
 
 app.post("/api/movies/", (req, res) => {
-    try {
-      addToApi(req.body);
-      res.status(200).send(res.body);
-    } catch (e) {
-      res.status(400).send({ error: e.message });
-    }
+  try {
+    addToApi(req.body);
+    res.status(200).send(res.body);
+  } catch (e) {
+    res.status(400).send({ error: e.message });
+  }
 });
 
 app.delete("/api/movies/:movie", (req, res) => {
-    try {
-      deleteInApi(req.params.movie);
-      res.status(200).send(req.params.movie);
-    } catch (e) {
-      res.status(400).send({ error: e.message });
-    }
+  try {
+    deleteInApi(req.params.movie);
+    res.status(200).send(req.params.movie);
+  } catch (e) {
+    res.status(400).send({ error: e.message });
+  }
 });
 
 app.put("/api/movies/:movie", (req, res) => {
