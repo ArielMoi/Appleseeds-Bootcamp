@@ -42,8 +42,8 @@ const updateMovie = (titleToUpdate, updateObj) => {
   return updatedMovies;
 };
 
-const filteredMovies = () => {
-  return moviesJson.sort((a, b) => a.rating - b.rating);
+const sortedMovies = () => {
+  return moviesJson.sort((a, b) => b.rating - a.rating);
 };
 
 module.exports = {
@@ -52,5 +52,5 @@ module.exports = {
   findMovie,
   getAllMovies,
   updateMovie,
-  filteredMovies,
+  sortedMovies,
 };

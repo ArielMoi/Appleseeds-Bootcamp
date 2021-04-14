@@ -7,7 +7,7 @@ const {
   findMovie,
   getAllMovies,
   updateMovie,
-  filteredMovies,
+  sortedMovies,
 } = require("./utils.js");
 
 app.use(express.json());
@@ -15,7 +15,7 @@ app.use(express.json());
 app.get("/api/movies", (req, res) => {
   try {
     if (req.query.sorted) {
-      const movies = filteredMovies();
+      const movies = sortedMovies();
       res.status(200).send(movies);
     } else {
       const movies = getAllMovies();
