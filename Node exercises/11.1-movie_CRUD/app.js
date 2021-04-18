@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+const port = process.env.PORT || 8000
 
 const {
   deleteInApi,
@@ -66,7 +67,6 @@ app.put("/api/movies/:movie", (req, res) => {
   }
 });
 
-const PORT = 8000;
-app.listen(PORT, () => {
-  console.log("listening..");
+app.listen(port, () => {
+  console.log("listening.. on " + port);
 });

@@ -8,25 +8,25 @@ function GetFromApi() {
   // const [specificData, setSpecific] = useState({});
 
   const getAllData = async () => {
-    const data = await axios.get("http://localhost:8000/api/movies");
+    const data = await axios.get("/api/movies");
     return data;
   };
 
   const getSpecificData = async (movie) => {
-    const data = await axios.get(`http://localhost:8000/api/movies/${movie}`);
+    const data = await axios.get(`/api/movies/${movie}`);
     return data;
   };
 
   const deleteMovie = async (movie) => {
     const data = await axios.delete(
-      `http://localhost:8000/api/movies/${movie}`
+      `/api/movies/${movie}`
     );
 
     return data;
   };
 
   const postMovie = async (movie) => {
-    const data = await axios.post("http://localhost:8000/api/movies", {
+    const data = await axios.post("/api/movies", {
     title: movie.title,
     id: movie.id,
     year: movie.year,
