@@ -5,7 +5,7 @@ import axios from "axios";
 
 function GetFromApi() {
   const [allData, setAllData] = useState([]);
-  const [specificData, setSpecific] = useState({});
+  // const [specificData, setSpecific] = useState({});
 
   const getAllData = async () => {
     const data = await axios.get("http://localhost:8000/api/movies");
@@ -38,16 +38,19 @@ function GetFromApi() {
   }
 
   useEffect(() => {
-    console.log(getAllData());
-    setAllData(getAllData());
+    const get = async () => {
+      let {data} = await getAllData()
+      console.log(data);
+      setAllData(data);
+    }
+    get();
   }, [])
 
   return (
     <div>
-      {allData}
-      {allData.map(d => <p>{d}</p>)}
+      {allData && allData.map(d => Object.values(d).map(i => (<p>{i}</p>)))}
     </div>
-  )
+  );
 
 }
 

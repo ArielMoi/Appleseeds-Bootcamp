@@ -12,8 +12,8 @@ const {
   sortedMovies,
 } = require("./utils.js");
 
+app.use(cors());
 app.use(express.json());
-// app.use(cors());
 
 app.get("/api/movies", (req, res) => {
   try {
