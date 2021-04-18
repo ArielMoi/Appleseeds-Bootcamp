@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
 
 const {
   deleteInApi,
@@ -11,6 +13,7 @@ const {
 } = require("./utils.js");
 
 app.use(express.json());
+// app.use(cors());
 
 app.get("/api/movies", (req, res) => {
   try {
@@ -63,7 +66,7 @@ app.put("/api/movies/:movie", (req, res) => {
   }
 });
 
-const PORT = 3000;
+const PORT = 8000;
 app.listen(PORT, () => {
   console.log("listening..");
 });
