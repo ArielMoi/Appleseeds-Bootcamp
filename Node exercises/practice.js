@@ -1,12 +1,29 @@
-const express = require("express");
-const app = express();
-const port = 3000;
+const mongoose = require('mongoose')
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-  console.log(res);
-});
+mongoose.connect('mongodb://localhost:27017/practice', {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+})
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+const User = mongoose.model('User', {
+  name: {
+    type: String,
+  }, 
+  age: {
+    type: Number,
+    validate(value){
+      if (value < 0){
+        throw new Error('under 0')
+      }
+    }
+  }
+})
+
+const ariel = new User({
+  name: 'ariel',
+  age: 23
+})
+
+ariel.save().then(() => {
+  console.log(ariel);
+}).catch(e => console.log(e))
