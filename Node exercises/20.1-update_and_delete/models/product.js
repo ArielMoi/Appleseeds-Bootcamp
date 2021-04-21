@@ -1,3 +1,6 @@
+const mongoose = require("mongoose");
+const validator = require("validator");
+
 const Product = mongoose.model("Product", {
   name: {
     type: String,
@@ -49,3 +52,5 @@ const Product = mongoose.model("Product", {
     },
   },
 });
+
+module.exports = Product;

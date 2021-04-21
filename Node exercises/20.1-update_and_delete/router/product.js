@@ -2,7 +2,6 @@ const express = require("express");
 const Product = require("../models/product");
 const router = new express.Router();
 
-
 router.get("/products/", (req, res) => {
   if (req.query.active) {
     Product.find({ isActive: true })
@@ -54,3 +53,41 @@ router.get("/products/", (req, res) => {
       });
   }
 });
+
+router.patch("/products/:id", async (req, res) => {
+  if (req.query.active) {
+    try {
+      const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {
+        isActive: req.query.active,
+      });
+
+      console.log(updatedProduct);
+      res.status(200).send(updatedProduct);
+    } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+    }
+  }
+});
+
+router.delete("/products/:id", async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    console.log(deletedProduct);
+    res.status(200).send(deletedProduct);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+router.delete("/products/", async (req, res) => {
+  try {
+    const deletedProducts = await Product.deleteMany({});
+    console.log(deletedProducts);
+    res.status(200).send(deletedProducts);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+module.exports = router;
